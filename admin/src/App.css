@@ -1,8 +1,7 @@
 .admin-sidebar{
   width:250px;
   min-height:100vh;
-  /* position: sticky; */
-  /* height: ; */
+
   background:#1e3a5f;
   color:white;
   padding:20px;
@@ -21,11 +20,6 @@
 .admin-sidebar li:hover{
   color:#ffc107;
 }
-
-/* .admin-sidebar a{
-  text-decoration: none;
-  color: white;
-} */
 
 .admin-sidebar a{
 display:block;
@@ -48,7 +42,6 @@ border-radius:5px;
 }
 
 .content{
-  /* flex:1; */
   padding:30px;
 }
 

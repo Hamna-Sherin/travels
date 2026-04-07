@@ -14,12 +14,10 @@ const Destinations = () => {
     const limit = 3
 
     useEffect(() => {
-        // axios.get('http://localhost:5000/destination')
         axios.get(`http://localhost:5000/destination`, {
             params: {
                 page,
                 limit,
-                // search
             }
         })
             .then(result => {
@@ -106,10 +104,6 @@ const Destinations = () => {
                                     </td>
 
                                     <td>
-                                        {/* <Button size="sm" variant="warning" className="me-2">
-                                            Edit
-                                        </Button> */}
-                                        {/* <Button className='btn-warning rounded me-2' onClick={(e) => handleShow(dest._id)}>Edit</Button> */}
                                         <Link to={`/editDestination/${dest._id}`} className='btn btn-warning m-2'>Edit</Link>
 
                                         <Button className='btn-danger rounded' onClick={(e) => handleShow(dest._id)}>Delete</Button>

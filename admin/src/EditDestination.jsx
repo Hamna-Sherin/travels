@@ -73,7 +73,9 @@ const EditDestination = () => {
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <Form className="w-50 p-4 border rounded" onSubmit={update}>
+                
                 <h2 className="text-center mb-4">Edit Destination</h2>
+
                 <Form.Group className="mb-3" controlId="formBasicDestination">
                     <Form.Label>Destination</Form.Label>
                     <Form.Control type="text" placeholder="Enter Destination" onChange={(e) => setDestination(e.target.value)} value={Destination} />

@@ -128,34 +128,6 @@ const AddPackage = () => {
                   </Col>
                 </Row>
 
-                {/* <Row>
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Check-in Date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        name="checkIn"
-                        value={formData.checkIn}
-                        onChange={handleChange}
-                        required
-                      />
-                    </Form.Group>
-                  </Col>
-
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Check-out Date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        name="checkOut"
-                        value={formData.checkOut}
-                        onChange={handleChange}
-                        required
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row> */}
-
                 <Row>
                   <Col md={6}>
                     <Form.Group className="mb-3">
@@ -211,16 +183,6 @@ const AddPackage = () => {
                     </Form.Group>
                   </Col>
                 </Row>
-
-                {/* <Form.Group className="mb-3">
-                  <Form.Label>Image URL</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                  />
-                </Form.Group> */}
 
                 <Form.Group className="mb-3" controlId="formBasicImage">
                   <Form.Label>Image</Form.Label>

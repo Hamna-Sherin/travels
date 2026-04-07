@@ -13,7 +13,6 @@ const EditPackage = () => {
         price: "",
         duration: "",
         description: "",
-        // image: "",
         category: "",
         slots: "",
         guests: "",
@@ -30,7 +29,6 @@ const EditPackage = () => {
             .catch(err => console.log(err));
     }, [id]);
 
-    // ✏️ Handle change
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -70,7 +68,6 @@ const EditPackage = () => {
         }
     }
 
-    // 🔄 Update package
     const handleSubmit = (e) => {
         e.preventDefault();
 
