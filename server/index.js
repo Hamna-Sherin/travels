@@ -18,42 +18,6 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err));
 
-// app.get('/destination', (req, res) => {
-//     DestinationModel.find()
-//         .then(destinations => res.json(destinations))
-//         .catch(err => res.json(err))
-// })
-
-// app.get('/destination', async (req, res) => {
-//     try {
-//         const page = parseInt(req.query.page) || 1;
-//         const limit = parseInt(req.query.limit) || 5;
-//         const skip = (page - 1) * limit;
-//         const search = req.query.search || "";
-//          const query = {};
-
-//         const query = {
-//             $or: [
-//                 { Name: { $regex: search, $options: "i" } },
-//                 { Author: { $regex: search, $options: "i" } }
-//             ]
-//         };
-
-//         const total = await DestinationModel.countDocuments(query);
-//         const destinations = await DestinationModel.find(query)
-//             .skip(skip)
-//             .limit(limit);
-
-//         res.json({
-//             destinations,
-//             totalPages: Math.ceil(total / limit),
-//             currentPage: page
-//         });
-
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
 
 app.get('/destination', async (req, res) => {
     try {
@@ -64,7 +28,6 @@ app.get('/destination', async (req, res) => {
         const location = req.query.location || "";
         const category = req.query.category || "";
 
-        // ✅ Add filter here
         let query = {};
 
         if (location) {
@@ -130,22 +93,6 @@ app.get("/destination/:id", async (req, res) => {
     res.json(destination);
 });
 
-// app.get("/destination", async (req, res) => {
-//     const { location, page = 1, limit = 6 } = req.query;
-
-//     let filter = {};
-
-//     if (location) {
-//         filter.Location = location;  // 👈 match district
-//     }
-
-//     const destinations = await Destination.find(filter)
-//         .skip((page - 1) * limit)
-//         .limit(parseInt(limit));
-
-//     res.json({ destinations });
-// });
-
 app.post("/booking", async (req, res) => {
     try {
         const booking = new BookingModel(req.body);
@@ -160,7 +107,7 @@ app.post("/booking", async (req, res) => {
 
 app.get("/bookings", async (req, res) => {
     try {
-        const bookings = await BookingModel.find().sort({ _id: -1 }); // latest first
+        const bookings = await BookingModel.find().sort({ _id: -1 });
         res.json(bookings);
     } catch (err) {
         res.status(500).json(err);
@@ -190,14 +137,13 @@ app.post("/register", async (req, res) => {
         if (!phone || phone.length !== 10) {
             return res.status(400).json({ message: "Invalid phone number" });
         }
-        // check if user exists
+
         const existingUser = await UserModel.findOne({ email });
 
         if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
 
-        // hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new UserModel({
@@ -218,17 +164,13 @@ app.post("/register", async (req, res) => {
 
 app.get("/users", async (req, res) => {
     try {
-        const users = await UserModel.find().sort({ _id: -1 }); // latest first
+        const users = await UserModel.find().sort({ _id: -1 });
         res.json(users);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-// const bcrypt = require("bcryptjs"); // if you used hashing
-// const UserModel = require("./models/User");
-
-// LOGIN API
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -239,7 +181,6 @@ app.post("/login", async (req, res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
-        // If using hashed password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
