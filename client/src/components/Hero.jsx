@@ -1,42 +1,46 @@
-import React from 'react'
-import { Carousel } from 'react-bootstrap'
-import Image from "../images/Image.png";
+import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <div>
-            <Carousel >
-                <Carousel.Item className='hero1'>
-                    <div className='hero-overlay'>
-                        <h1>Make You Free To Travel</h1>
-                        <h1>With Us</h1>
-                        <p>Discover the breathtaking beauty of Kerala.</p>
-                        <div>
-                        <button className="hero-btn">Explore More</button>
-                        <button className="hero-btn ms-2">Contact Us</button>
-                        </div>
-                    </div>
-                </Carousel.Item>
-                <Carousel.Item className='hero2'>
-                    {/* <img src={Image} alt="" style={{width:"100%", height:"75vh"}} /> */}
-                    <div className='hero-overlay'>
-                        <h1>Family Trips in Kerala</h1>
-                        <h1> Fun for Kids </h1>
-                        <p>Discover exciting houseboats, wildlife parks and beach adventures that kids will love..</p>
-                        <button className="hero-btn">Find More</button>
-                    </div>
-                </Carousel.Item>
-                <Carousel.Item className='hero3'>
-                    <div className='hero-overlay'>
-                        <h1>Your Adventure Wonderful</h1>
-                        <h1>Travel Calls Fast</h1>
-                        <p>Adventure awaits in Kerala’s green hills with unforgettable trekking experiences.</p>
-                        <button className="hero-btn">View More</button>
-                    </div>
-                </Carousel.Item>
-            </Carousel>
+           <section id="home">
+        <div className="hero-bg" />
+        <div className="hero-content ">
+          {/* <div className="location-badge">
+            <span className="pin-icon">📍</span> Kottakkal, Kerala
+          </div> */}
+          <h1 className="hero-heading">Affordable <span className="gold">Kerala</span></h1>
+          <h1 className="hero-subheading">Tours</h1>
+          <h1 className="hero-heading-last">You'll Never Forget</h1>
+          <p className="hero-desc">
+            From the backwaters of Alleppey to the hills of Munnar — Rafco
+            Travels crafts personalised Kerala experiences that fit your budget perfectly.
+          </p>
+          <div className="hero-ctas">
+            <a href="#packages" className="btn-primary">
+              ⊙ Explore Packages
+            </a>
+            <a href="#contact" className="btn-outline">
+              💬 Chat With Us
+            </a>
+          </div>
         </div>
-    )
-}
+      </section>
 
-export default Hero
+      {/* Floating WhatsApp */}
+      <a href="https://wa.me/" className="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        💬
+      </a>
+    </div>
+  );
+};
+
+export default Hero;

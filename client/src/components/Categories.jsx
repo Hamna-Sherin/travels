@@ -10,30 +10,26 @@ import spiritual from "../images/spiritual.png";
 import adventure from "../images/hero-image2.webp";
 import { Col, Row } from "react-bootstrap";
 
-
-
-
 const CategorySection = () => {
 
     const categories = [
-  { name: "Beach", image: beach },
-  { name: "Hill Station", image: hill },
-  { name: "Waterfall", image: waterfall },
-  { name: "Wildlife", image: wildlife },
-  { name: "Backwaters", image: backwaters },
-  { name: "Heritage", image: heritage },
-  { name: "Spiritual", image: spiritual },
-  { name: "Adventure", image: adventure }
-];
+        { name: "Beach", image: beach },
+        { name: "Hill Station", image: hill },
+        { name: "Waterfall", image: waterfall },
+        { name: "Wildlife", image: wildlife },
+        { name: "Backwaters", image: backwaters },
+        { name: "Heritage", image: heritage },
+        { name: "Spiritual", image: spiritual },
+        { name: "Adventure", image: adventure }
+    ];
     const navigate = useNavigate();
 
     return (
-        <div className="container text-center my-5">
-            {/* <h2 className="mb-4">Explore by Category</h2> */}
-            <div className="text-center m-5">
-                <h2 className="section-title">Explore by Category</h2>
-                <div className="title-line"></div>
-                <p className="section-desc">
+        <div className="categories text-center my-5">
+            <div className="text-center mb-5">
+                <h2 className="fw-bold">Explore by Category</h2>
+                <div className="underline mx-auto my-3"></div>
+                <p className="text-muted w-75 mx-auto">
                     Discover destinations based on your travel interests.
                 </p>
             </div>

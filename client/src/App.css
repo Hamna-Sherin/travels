@@ -665,7 +665,7 @@
 .taxi-card h5 {
   font-weight: 600;
   margin-bottom: 15px;
-  border-left: 4px solid #ff4d6d;
+  border-left: 4px solid #e8c97a;
   padding-left: 10px;
 }
 
@@ -910,4 +910,17 @@
 
 .card-bottom button:hover {
   background: #e04848;
+}
+
+.services-scroll {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.services-scroll::-webkit-scrollbar {
+    display: none; /* hide scrollbar */
+}
+
+.choose-card {
+    min-width: 300px; /* controls how many cards show */
 }

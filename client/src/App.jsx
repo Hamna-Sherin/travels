@@ -9,6 +9,10 @@ import Login from './Login';
 import Register from './Register';
 import PackageDetails from './PackageDetails';
 import AllPackages from './AllPackages';
+import "./New.css";
+import Saved from './Saved';
+import Favorites from './Favorites';
+
 
 const App = () => {
   return (
@@ -23,6 +27,8 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/package/:id" element={<PackageDetails />} />
           <Route path="/all-packages" element={<AllPackages />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
     </div>

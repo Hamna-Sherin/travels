@@ -1,114 +1,148 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaHeart, FaBookmark } from 'react-icons/fa';
 
 const Destinations = () => {
-
     const navigate = useNavigate();
 
-    const [Destination, setDestination] = useState([])
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(1)
+    const [Destination, setDestination] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [favourites, setFavourites] = useState([]);
+    const [saved, setSaved] = useState([]);
+
 
     useEffect(() => {
-        // axios.get('http://localhost:5000/destination')
-        //     .then(result => setDestination(result.data.destinations))
-        //     .catch(err => console.log(err))
         axios.get(`http://localhost:5000/destination`, {
-            params: {
-                page,
-                limit: 6
-                // search
-            }
+            params: { page, limit: 6 }
         })
             .then(result => {
-                setDestination(result.data.destinations)
-                console.log(result.data.totalPages);
-                
-                setTotalPages(result.data.totalPages)
-
+                setDestination(result.data.destinations);
+                setTotalPages(result.data.totalPages);
             })
-            .catch(err => console.log(err))
-    }, [page])
+            .catch(err => console.log(err));
+    }, [page]);
 
+    useEffect(() => {
+        const savedItems = JSON.parse(localStorage.getItem("saved")) || [];
+        setSaved(savedItems.map(item => item._id));
+    }, []);
 
+    useEffect(() => {
+    const favItems = JSON.parse(localStorage.getItem("favourites")) || [];
+    setFavourites(favItems.map(item => item._id));
+}, []);
+
+    const toggleFavourite = (item) => {
+        let favItems = JSON.parse(localStorage.getItem("favourites")) || [];
+
+        const exists = favItems.find((i) => i._id === item._id);
+
+        if (exists) {
+            favItems = favItems.filter((i) => i._id !== item._id);
+        } else {
+            favItems.push(item);
+        }
+
+        localStorage.setItem("favourites", JSON.stringify(favItems));
+
+        // update UI state (only IDs)
+        setFavourites(favItems.map(i => i._id));
+    };
+
+    const toggleSaved = (item) => {
+        let savedItems = JSON.parse(localStorage.getItem("saved")) || [];
+
+        const exists = savedItems.find((i) => i._id === item._id);
+
+        if (exists) {
+            savedItems = savedItems.filter((i) => i._id !== item._id);
+        } else {
+            savedItems.push(item);
+        }
+
+        localStorage.setItem("saved", JSON.stringify(savedItems));
+
+        // update local state (only IDs for UI)
+        setSaved(savedItems.map(i => i._id));
+    };
 
     return (
-        <div>
-            <div className="text-center m-5">
-                <h2 className="section-title">Explore our Tourist Destinations</h2>
-                <div className="title-line"></div>
-                <p className="section-desc">
-                    Lorem Ipsum is simply dummy text the printing and typesetting industry.
+        <div id='destinations' className="destinations-section">
+
+            {/* Heading */}
+            <div className="text-center mb-5">
+                <span className="section-tag">What To See</span>
+                <h2 className="section-title">Explore Our Tourist Destinations</h2>
+                <hr className="services-divider" />
+                <p className="text-muted mx-auto" style={{ maxWidth: "520px", fontSize: "0.97rem", lineHeight: "1.8" }}>
+                    Discover handpicked destinations across Kerala — from serene backwaters
+                    to misty hilltops, every place tells a story.
                 </p>
             </div>
-            <Row className='ms-4'>
-                {Destination.map((dest) => {
-                    return (
-                        <Col md={4}>
-                            {/* <Card className="h-100 shadow-sm"> */}
-                            {/* <Card className='m-2' style={{ width: '23rem', height: "460px", display:"flex", flexDirection:"column"}}>
-                                <Card.Img variant="top" src={dest.Image} style={{ height: "250px" }} />
-                                <Card.Body className='text-center'>
-                                    <div style={{height:"140px", alignContent:"center"}}>
-                                        <Card.Title className='fw-bold'>{dest.Destination},{dest.Location}</Card.Title>
-                                        <Card.Text>
-                                            {dest.Description}
-                                        </Card.Text>
-                                    </div>
-                                    <div>
-                                        <Button onClick={() => navigate(`/destination/${dest._id}`)}>Read More</Button>
-                                    </div>
-                                </Card.Body>
-                            </Card> */}
-                            <Card className="destination-card m-2">
+
+            {/* Cards */}
+            <Row className="px-4 g-4">
+                {Destination.map((dest) => (
+                    <Col md={4} key={dest._id}>
+                        <Card className="destination-card">
+
+                            {/* Image + icon overlay */}
+                            <div className="dest-img-wrapper">
                                 <Card.Img variant="top" src={dest.Image} />
+                                <div className="dest-icons">
+                                    <button
+                                        className={`dest-icon-btn ${favourites.includes(dest._id) ? 'active-heart' : ''}`}
+                                        onClick={() => toggleFavourite(dest)}
+                                        title="Add to Favourites"
+                                    >
+                                        <FaHeart />
+                                    </button>
+                                    <button
+                                        className={`dest-icon-btn ${saved.includes(dest._id) ? 'active-save' : ''}`}
+                                        onClick={() => toggleSaved(dest)}
+                                        title="Save"
+                                    >
+                                        <FaBookmark />
+                                    </button>
+                                </div>
+                            </div>
 
-                                <Card.Body>
-                                    <div>
-                                        <Card.Title>
-                                            {dest.Destination}, {dest.Location}
-                                        </Card.Title>
-
-                                        <Card.Text>
-                                            {dest.Description}
-                                        </Card.Text>
-                                    </div>
-
-                                    <div className="btn-wrapper text-center">
-                                        <Button onClick={() => navigate(`/destination/${dest._id}`)}>
-                                            Read More
-                                        </Button>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    )
-                })
-                }
+                            <Card.Body>
+                                <div>
+                                    <Card.Title>
+                                        {dest.Destination}, {dest.Location}
+                                    </Card.Title>
+                                    <Card.Text>
+                                        {dest.Description}
+                                    </Card.Text>
+                                </div>
+                                <div className="btn-wrapper text-center">
+                                    <Button onClick={() => navigate(`/destination/${dest._id}`)}>
+                                        Read More
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
             </Row>
-            <div className="d-flex justify-content-center gap-2 m-3">
-                <Button
-                    disabled={page === 1}
-                    onClick={() => setPage(page - 1)}
-                >
-                    Prev
+
+            {/* Pagination */}
+            <div className="dest-pagination">
+                <Button disabled={page === 1} onClick={() => setPage(page - 1)}>
+                    ← Prev
                 </Button>
-
-                <span className="align-self-center">
-                    Page {page} of {totalPages}
-                </span>
-
-                <Button
-                    disabled={page === totalPages}
-                    onClick={() => setPage(page + 1)}
-                >
-                    Next
+                <span className="page-info">Page {page} of {totalPages}</span>
+                <Button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+                    Next →
                 </Button>
             </div>
-        </div>
-    )
-}
 
-export default Destinations
+        </div>
+    );
+};
+
+export default Destinations;

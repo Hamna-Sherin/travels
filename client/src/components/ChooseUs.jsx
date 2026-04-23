@@ -8,7 +8,7 @@ import { BsGlobeAmericas } from "react-icons/bs";
 
 const ChooseUs = () => {
     return (
-        <section className="why-choose-us pt-5">
+        <section className="why-choose-us pt-5 m-5">
             <Container>
                 {/* Heading */}
                 <div className="text-center mb-5">

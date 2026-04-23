@@ -1,185 +1,128 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
 
 const testimonials = [
   {
     id: 1,
-    name: "John Doe",
-    role: "CEO/Mario Brand",
+    name: "Arjun & Sana",
+    role: "Kozhikode",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate animi aliquid itaque consequatur nulla cupiditate voluptas beatae earum eius provident? Assumenda, sed mollitia iste corrupti iusto tempora aliquam explicabo voluptatum officiis eius aut veniam at. Sapiente, impedit! Temporibus excepturi nesciunt accusantium, vel cum eveniet laudantium obcaecati corporis commodi, ea tempore.",
+    text: "Booked the Munnar package for our honeymoon. The arrangements were perfect — hotel, vehicle, everything on time. Rafco really understands what couples need!",
+    stars: 5,
   },
   {
     id: 2,
-    name: "Drank Bastis Doe",
-    role: "COO/Nell & wells Co.",
+    name: "Raheema Fathima",
+    role: "Tirur, Malappuram",
     image: "https://randomuser.me/api/portraits/women/44.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate animi aliquid itaque consequatur nulla cupiditate voluptas beatae earum eius provident? Assumenda, sed mollitia iste corrupti iusto tempora aliquam explicabo voluptatum officiis eius aut veniam at. Sapiente, impedit! Temporibus excepturi nesciunt accusantium, vel cum eveniet laudantium obcaecati corporis commodi, ea tempore.",
+    text: "We did a family trip to Alleppey with 12 people. The houseboat was amazing and the food was delicious. Rafco handled everything — very professional and affordable.",
+    stars: 5,
   },
   {
     id: 3,
-    name: "Alex Smith",
-    role: "Manager/Travel Co.",
+    name: "Sidhique P",
+    role: "Kottakkal",
     image: "https://randomuser.me/api/portraits/men/12.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate animi aliquid itaque consequatur nulla cupiditate voluptas beatae earum eius provident? Assumenda, sed mollitia iste corrupti iusto tempora aliquam explicabo voluptatum officiis eius aut veniam at. Sapiente, impedit! Temporibus excepturi nesciunt accusantium, vel cum eveniet laudantium obcaecati corporis commodi, ea tempore.",
+    text: "I called them on a Tuesday and by Friday we were in Wayanad! Last-minute trip done perfectly. The guide was very knowledgeable. Will book again for Thekkady next.",
+    stars: 5,
   },
   {
     id: 4,
     name: "Sara Lee",
-    role: "Founder/Trip World",
+    role: "Founder / Trip World",
     image: "https://randomuser.me/api/portraits/women/68.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate animi aliquid itaque consequatur nulla cupiditate voluptas beatae earum eius provident? Assumenda, sed mollitia iste corrupti iusto tempora aliquam explicabo voluptatum officiis eius aut veniam at. Sapiente, impedit! Temporibus excepturi nesciunt accusantium, vel cum eveniet laudantium obcaecati corporis commodi, ea tempore.",
+    text: "From the backwaters to the hill stations, every detail was taken care of. The team at Rafco Travels made our Kerala trip truly unforgettable.",
+    stars: 5,
   },
 ];
 
 const Testimonial = () => {
-//   const [index, setIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-//   const nextSlide = () => {
-//     if (index < testimonials.length - 2) {
-//       setIndex(index + 1);
-//     } else {
-//       setIndex(0);
-//     }
-//   };
+  const nextSlide = () => {
+    if (currentIndex < testimonials.length - 2) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
-//   const prevSlide = () => {
-//     if (index > 0) {
-//       setIndex(index - 1);
-//     } else {
-//       setIndex(testimonials.length - 2);
-//     }
-//   };
-
-const [currentIndex, setCurrentIndex] = useState(0);
-
-const nextSlide = () => {
-  if (currentIndex < testimonials.length - 2) {
-    setCurrentIndex(currentIndex + 1);
-  }
-};
-
-const prevSlide = () => {
-  if (currentIndex > 0) {
-    setCurrentIndex(currentIndex - 1);
-  }
-};
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
-    // <section className="testimonial-section">
-    //   <Container>
+    <section id="reviews" className="testimonial-section">
+      <div className="container">
 
-    //     {/* SECTION HEADER */}
-    //     <div className="testimonial-header text-center">
-    //       <div className="section-line"></div>
-    //       <p>
-    //         Lorem Ipsum is simply dummy text the printing and typesetting
-    //         industry. Lorem Ipsum has been the industry's standard dummy text.
-    //       </p>
-    //     </div>
+        {/* Header */}
+        <div className="section-header">
+          <span className="section-tag">Traveller Reviews</span>
+          <h2>What Our Guests Say</h2>
+          <div className="section-line"></div>
+          <p>
+            Real experiences from travellers who explored Kerala with Rafco Travels —
+            from backwaters to hilltops.
+          </p>
+        </div>
 
-    //     <div className="slider-wrapper">
+        {/* Slider */}
+        <div className="slider-wrapper">
 
-    //       <div
-    //         className="slider-track"
-    //         style={{
-    //           transform: `translateX(-${index * 50}%)`,
-    //         }}
-    //       >
-    //         {testimonials.map((item) => (
-    //           <div className="testimonial-slide" key={item.id}>
-    //             <div className="testimonial-card">
-    //               <FaQuoteLeft className="quote-icon" />
-    //               <p>{item.text}</p>
-    //             </div>
+          <button
+            className="nav-btn"
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+          >
+            <IoIosArrowBack />
+          </button>
 
-    //             <div className="testimonial-user">
-    //               <img src={item.image} alt="" />
-    //               <div>
-    //                 <h5>{item.name}</h5>
-    //                 <p>{item.role}</p>
-    //                 <div className="stars">
-    //                   <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         ))}
-    //       </div>
+          <div className="slider">
+            <div
+              className="slider-track"
+              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+            >
+              {testimonials.map((item) => (
+                <div className="testimonialcard" key={item.id}>
+                  <div className="testi-card-inner">
 
-    //       <div className="arrow left-arrow" onClick={prevSlide}>
-    //         <IoIosArrowBack />
-    //       </div>
+                    <span className="testi-quote">"</span>
 
-    //       <div className="arrow right-arrow" onClick={nextSlide}>
-    //         <IoIosArrowForward />
-    //       </div>
+                    <p className="testi-text">{item.text}</p>
 
-    //     </div>
-    //   </Container>
-    // </section>
+                    <div className="testi-stars">
+                      {"★".repeat(item.stars)}
+                    </div>
 
-    <section className="testimonial-section">
-  <div className="container">
-    <div className="section-header">
-        <h2>What Our Clients Say</h2>
-      <span className="line"></span>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </p>
-    </div>
+                    <div className="testi-author">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="testi-avatar"
+                      />
+                      <div>
+                        <div className="testi-name">{item.name}</div>
+                        <div className="testi-role">📍 {item.role}</div>
+                      </div>
+                    </div>
 
-    <div className="slider-wrapper">
-      <button className="nav-btn left" onClick={prevSlide}>
-        &#10094;
-      </button>
-
-      <div className="slider">
-        <div
-          className="slider-track"
-          style={{
-            transform: `translateX(-${currentIndex * 50}%)`,
-          }}
-        >
-          {testimonials.map((item, index) => (
-            <div className="testimonialcard" key={index}>
-              {/* <div className="quote">“<p>{item.text}</p></div>
-              <p>{item.text}</p> */}
-              <div style={{color:"grey"}}>
-                {/* <FaQuoteLeft size={150}/> */}
-                <p><span><FaQuoteLeft size={30}/></span>{item.text}</p> 
-                <div className="user">
-                <img src={item.image} alt="" />
-                <div>
-                  <h4>{item.name}</h4>
-                  <span>{item.role}</span>
-                  <div className="stars">★★★★★</div>
+                  </div>
                 </div>
-              </div>
-              </div>
-
-              {/* <div className="user">
-                <img src={item.image} alt="" />
-                <div>
-                  <h4>{item.name}</h4>
-                  <span>{item.role}</span>
-                  <div className="stars">★★★★★</div>
-                </div>
-              </div> */}
+              ))}
             </div>
-          ))}
+          </div>
+
+          <button
+            className="nav-btn"
+            onClick={nextSlide}
+            disabled={currentIndex >= testimonials.length - 2}
+          >
+            <IoIosArrowForward />
+          </button>
+
         </div>
       </div>
-
-      <button className="nav-btn right" onClick={nextSlide}>
-        &#10095;
-      </button>
-    </div>
-  </div>
-</section>
+    </section>
   );
 };
 

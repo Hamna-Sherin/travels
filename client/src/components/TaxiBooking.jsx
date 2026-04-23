@@ -66,10 +66,10 @@ const TaxiBooking = () => {
     };
 
     return (
-        <div className="container my-5">
+        <div id="bookTaxi" className="taxi my-5">
             <div className="text-center mb-4">
                 <h2 className="section-title">Book Your Taxi</h2>
-                <div className="title-line"></div>
+                    <div className="underline mx-auto my-3"></div>
             </div>
 
             <Form onSubmit={handleSubmit} className="taxi-card shadow-lg p-4">

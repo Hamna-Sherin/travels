@@ -11,6 +11,7 @@ import DistrictGrid from './components/DistrictGrid'
 import Destinations from './components/Destinations'
 import CategorySection from './components/Categories'
 import TaxiBooking from './components/TaxiBooking'
+import Services from './components/Services'
 
 const Home = () => {
   return (
@@ -18,7 +19,8 @@ const Home = () => {
         <NavbarComponent />
         <Hero />
         <AboutSearch />
-        <ChooseUs />
+        {/* <ChooseUs /> */}
+        <Services />
         <CategorySection />
         <DistrictGrid />
         <Destinations />
