@@ -8,7 +8,7 @@ const AllPackages = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/allPackages")
+    axios.get("https://travels-bp73.onrender.com/allPackages")
       .then(res => setPackages(res.data))
       .catch(err => console.log(err));
   }, []);

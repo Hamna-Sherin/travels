@@ -6,13 +6,13 @@ const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/bookings")
+    axios.get("https://travels-bp73.onrender.com/bookings")
       .then(res => setBookings(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const handleStatusChange = (id, status) => {
-    axios.put(`http://localhost:5000/bookings/${id}`, { status })
+    axios.put(`https://travels-bp73.onrender.com/bookings/${id}`, { status })
       .then(() => {
         setBookings(prev =>
           prev.map(b =>

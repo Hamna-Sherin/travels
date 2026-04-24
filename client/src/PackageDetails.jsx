@@ -9,7 +9,7 @@ const PackageDetails = () => {
     const [pkg, setPkg] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/getPackage/` + id)
+        axios.get(`https://travels-bp73.onrender.com/getPackage/` + id)
             .then(res => setPkg(res.data))
             .catch(err => console.log(err));
     }, [id]);

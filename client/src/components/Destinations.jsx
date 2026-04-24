@@ -15,7 +15,7 @@ const Destinations = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/destination`, {
+        axios.get(`https://travels-bp73.onrender.com/destination`, {
             params: { page, limit: 6 }
         })
             .then(result => {

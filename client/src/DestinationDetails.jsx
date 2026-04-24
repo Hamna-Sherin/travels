@@ -9,7 +9,7 @@ const DestinationDetails = () => {
     const [destination, setDestination] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/destination/${id}`)
+        axios.get(`https://travels-bp73.onrender.com/destination/${id}`)
             .then(res => setDestination(res.data))
             .catch(err => console.log(err));
     }, [id]);

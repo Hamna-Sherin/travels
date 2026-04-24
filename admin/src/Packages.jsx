@@ -16,7 +16,7 @@ const Packages = () => {
 
   const fetchPackages = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/allPackages");
+      const res = await axios.get("https://travels-bp73.onrender.com/allPackages");
       setPackages(res.data);
     } catch (error) {
       console.error(error);
@@ -28,7 +28,7 @@ const Packages = () => {
   }, []);
 
   const handleDelete = () => {
-    axios.delete('http://localhost:5000/deletePackage/' + deleteId)
+    axios.delete('https://travels-bp73.onrender.com/deletePackage/' + deleteId)
       .then(res => {
         setPackages(packages.filter(packages => packages._id !== deleteId))
         handleClose()

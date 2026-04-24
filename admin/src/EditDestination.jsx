@@ -18,7 +18,7 @@ const EditDestination = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('http://localhost:5000/getDestination/' + id)
+        axios.get('https://travels-bp73.onrender.com/getDestination/' + id)
             .then(result => {
                 console.log(result)
                 setDestination(result.data.Destination)
@@ -63,7 +63,7 @@ const EditDestination = () => {
 
     const update = (e) => {
         e.preventDefault();
-        axios.put("http://localhost:5000/editDestination/" + id, { Destination, Location, Category, Description, Image })
+        axios.put("https://travels-bp73.onrender.com/editDestination/" + id, { Destination, Location, Category, Description, Image })
             .then(result => {
                 console.log(result)
                 navigate('/destinations')

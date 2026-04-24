@@ -9,7 +9,7 @@ const DistrictDestinations = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:5000/destination", {
+        axios.get("https://travels-bp73.onrender.com/destination", {
             params: {
                 location: name   // 👈 send district name
             }

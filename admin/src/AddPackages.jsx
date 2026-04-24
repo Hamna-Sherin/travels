@@ -60,7 +60,7 @@ const AddPackage = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/packages", formData);
+      await axios.post("https://travels-bp73.onrender.com/api/packages", formData);
       alert("Package Added Successfully!");
 
       setFormData({

@@ -48,7 +48,7 @@ const AddDestination = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:5000/addDestination", { Destination, Location, Category, Description, Image })
+        axios.post("https://travels-bp73.onrender.com/addDestination", { Destination, Location, Category, Description, Image })
             .then(result => {
                 console.log(result)
                 navigate('/destinations')

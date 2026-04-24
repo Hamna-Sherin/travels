@@ -33,7 +33,7 @@ const TaxiBooking = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:5000/booking", form);
+            const res = await axios.post("https://travels-bp73.onrender.com/booking", form);
 
             alert("Booking Confirmed ✅");
             console.log(res.data);

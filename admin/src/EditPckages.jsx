@@ -22,7 +22,7 @@ const EditPackage = () => {
 
     // 🧠 Fetch existing package
     useEffect(() => {
-        axios.get(`http://localhost:5000/getPackage/` + id)
+        axios.get(`https://travels-bp73.onrender.com/getPackage/` + id)
             .then(res => {
                 setFormData(res.data);
             })
@@ -71,7 +71,7 @@ const EditPackage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.put(`http://localhost:5000/editPackage/` + id, {formData,image})
+        axios.put(`https://travels-bp73.onrender.com/editPackage/` + id, {formData,image})
             .then(res => {
                 navigate("/packages");
             })

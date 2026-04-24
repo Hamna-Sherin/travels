@@ -9,7 +9,7 @@ const PackagesList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/packages")
+    axios.get("https://travels-bp73.onrender.com/packages")
       .then(res => setPackages(res.data.packages))
       .catch(err => console.log(err));
   }, []);

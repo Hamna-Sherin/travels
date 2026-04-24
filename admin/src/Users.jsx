@@ -10,7 +10,7 @@ const Users = () => {
   }, []);
 
   const fetchUsers = () => {
-    axios.get("http://localhost:5000/users")
+    axios.get("https://travels-bp73.onrender.com/users")
       .then(res => setUsers(res.data))
       .catch(err => console.log(err));
   };

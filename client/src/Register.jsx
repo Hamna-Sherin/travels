@@ -21,7 +21,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:5000/register", form);
+            const res = await axios.post("https://travels-bp73.onrender.com/register", form);
 
             alert("Registered Successfully ✅");
 

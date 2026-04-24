@@ -14,7 +14,7 @@ const Destinations = () => {
     const limit = 3
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/destination`, {
+        axios.get(`https://travels-bp73.onrender.com/destination`, {
             params: {
                 page,
                 limit,
@@ -35,7 +35,7 @@ const Destinations = () => {
     }
 
     const handleDelete = () => {
-        axios.delete('http://localhost:5000/deleteDestination/' + deleteId)
+        axios.delete('https://travels-bp73.onrender.com/deleteDestination/' + deleteId)
             .then(res => {
                 setDestinations(destinations.filter(destination => destination._id !== deleteId))
                 handleClose()
