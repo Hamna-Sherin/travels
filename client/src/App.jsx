@@ -12,6 +12,7 @@ import AllPackages from './AllPackages';
 import "./New.css";
 import Saved from './Saved';
 import Favorites from './Favorites';
+import Profile from './Profile';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/all-packages" element={<AllPackages />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

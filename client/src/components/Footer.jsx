@@ -1,86 +1,98 @@
 import React from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { FaPhoneAlt, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Container, Row, Col, Form } from "react-bootstrap";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { LiaPhoneVolumeSolid } from "react-icons/lia";
-
 
 const Footer = () => {
     return (
         <footer className="main-footer">
             <Container>
-                <Row>
+                <Row className="g-4">
 
-                    {/* LEFT SECTION */}
-                    <Col lg={4} className="mb-4">
+                    {/* LEFT — Brand + Contact */}
+                    <Col lg={4} md={6}>
 
-                        <div className="help-box">
-                            <h4>Need Nepayatri Help?</h4>
-                            <div className="underline my-3"></div>
-                            <div className="phone">
-                                <LiaPhoneVolumeSolid size={50} style={{ color: "#ff4a57" }} />
-                                <p>Got Questions? Call us 24/7! <br /> Call Us: (888) 1234 56789</p>
-                            </div>
+                        <div className="footer-logo">Rafco <span>Travels</span></div>
+                        <p className="footer-tagline">
+                            Crafting personalised Kerala experiences — from the backwaters
+                            of Alleppey to the misty hills of Munnar.
+                        </p>
+
+                        <div className="footer-phone">
+                            <LiaPhoneVolumeSolid size={36} />
+                            <p>
+                                Got Questions? Call us 24/7!<br />
+                                <strong>+91 88 1234 56789</strong>
+                            </p>
                         </div>
 
-                        <div className="contact-info">
-                            <h5>Contact Info</h5>
-                            <div className="underline my-3"></div>
-                            <p>PO Box: +47-252-254-2542</p>
-                            <p>Location: Collins St, Victoria 80, Australia</p>
+                        <div className="footer-contact">
+                            <p>📍 Kottakkal, Malappuram, Kerala</p>
+                            <p>✉️ hello@rafcotravels.com</p>
+                        </div>
 
-                            <div className="social-icons">
-                                <span><FaFacebookF /></span>
-                                <span><FaTwitter /></span>
-                                <span><FaInstagram /></span>
-                                <span><FaLinkedinIn /></span>
-                            </div>
+                        <div className="footer-social">
+                            <a href="#" title="Facebook"><FaFacebookF /></a>
+                            <a href="#" title="Twitter"><FaTwitter /></a>
+                            <a href="#" title="Instagram"><FaInstagram /></a>
+                            <a href="#" title="LinkedIn"><FaLinkedinIn /></a>
+                            <a href="https://wa.me/" title="WhatsApp" target="_blank" rel="noopener noreferrer">
+                                <FaWhatsapp />
+                            </a>
                         </div>
 
                     </Col>
 
                     {/* COMPANY */}
-                    <Col lg={2} md={4} className="mb-4 footer-links">
-                        <h5>Company</h5>
-                        <div className="underline mb-4"></div>
+                    <Col lg={2} md={3} sm={6} xs={6} className="footer-links">
+                        <h6 className="footer-heading">Company</h6>
+                        <hr className="footer-divider" />
                         <ul>
-                            <li className="mb-3">About Us</li>
-                            <li className="mb-3">Careers</li>
-                            <li className="mb-3">Terms of Use</li>
-                            <li className="mb-3">Privacy Statement</li>
-                            <li className="mb-3">Feedbacks</li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#">Privacy Statement</a></li>
+                            <li><a href="#">Feedback</a></li>
                         </ul>
                     </Col>
 
                     {/* SUPPORT */}
-                    <Col lg={2} md={4} className="mb-4 footer-links">
-                        <h5>Support</h5>
-                        <div className="underline mb-4"></div>
+                    <Col lg={2} md={3} sm={6} xs={6} className="footer-links">
+                        <h6 className="footer-heading">Support</h6>
+                        <hr className="footer-divider" />
                         <ul>
-                            <li className="mb-3">Account</li>
-                            <li className="mb-3">Legal</li>
-                            <li className="mb-3">Contact</li>
-                            <li className="mb-3">Affiliate Program</li>
-                            <li className="mb-3">Privacy Policy</li>
+                            <li><a href="#">Account</a></li>
+                            <li><a href="#">Legal</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Affiliate Program</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </Col>
 
                     {/* MAILING LIST */}
-                    <Col lg={4} md={4} className="mb-4 w-25">
-                        <h5>Mailing List</h5>
-                        <div className="underline mb-4"></div>
-                        <p>Sign up for our mailing list to get latest updates and offers</p>
-
+                    <Col lg={4} md={6} className="footer-subscribe">
+                        <h6 className="footer-heading">Stay Updated</h6>
+                        <hr className="footer-divider" />
+                        <p>
+                            Sign up for our mailing list to get the latest Kerala travel
+                            deals, packages, and offers.
+                        </p>
                         <Form className="subscribe-form">
-                            <Form.Control
-                                type="email"
-                                placeholder="Your Email"
-                            />
-                            <Button style={{width:"150px", backgroundColor:"#ff4a57"}}>SUBSCRIBE</Button>
+                            <Form.Control type="email" placeholder="Your email address" />
+                            <button className="btn-subscribe">Subscribe</button>
                         </Form>
                     </Col>
 
                 </Row>
             </Container>
+
+            {/* Bottom bar */}
+            <div className="footer-bottom">
+                <p>
+                    © {new Date().getFullYear()} <span>Rafco Travels</span>, Kottakkal.
+                    All rights reserved.
+                </p>
+            </div>
         </footer>
     );
 };

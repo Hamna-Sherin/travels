@@ -27,10 +27,17 @@ const NavbarComponent = () => {
       <Navbar expand="lg" expanded={expanded} className="custom-navbar shadow-sm fixed-top" >
         <Container fluid className="px-4">
 
-          {/* Logo */}
           <Navbar.Brand href="/" className="custom-logo">
             Rafco <span>Travels</span>
           </Navbar.Brand>
+
+          <div className={`mobile-user-top ${expanded ? "show" : ""}`}>
+            {user ? (
+              <FaCircleUser size={26} onClick={() => navigate(user ? "/profile" : "/login")} />
+            ) : (
+              <FaCircleUser size={26} onClick={() => navigate(user ? "/profile" : "/login")} />
+            )}
+          </div>
 
           <Navbar.Toggle aria-controls="main-navbar" onClick={() => setExpanded(!expanded)} />
 
@@ -38,35 +45,62 @@ const NavbarComponent = () => {
 
             {/* Center Menu */}
             <Nav className="mx-auto gap-3 center-nav">
-              <Nav.Link href="#home" className="custom-nav-link onClick={() => setExpanded(false)}">Home</Nav.Link>
-              <Nav.Link href="#why-us" className="custom-nav-link onClick={() => setExpanded(false)}">Services</Nav.Link>
-              <Nav.Link href="#packages" className="custom-nav-link onClick={() => setExpanded(false)}">Packages</Nav.Link>
-              <Nav.Link href="#bookTaxi" className="custom-nav-link onClick={() => setExpanded(false)}">Book Taxi</Nav.Link>
-              <Nav.Link href="#reviews" className="custom-nav-link onClick={() => setExpanded(false)}">Reviews</Nav.Link>
+              <Nav.Link href="#home" className="custom-nav-link" onClick={() => setExpanded(false)}>Home</Nav.Link>
+              <Nav.Link href="#why-us" className="custom-nav-link" onClick={() => setExpanded(false)}>Services</Nav.Link>
+              <Nav.Link href="#packages" className="custom-nav-link" onClick={() => setExpanded(false)}>Packages</Nav.Link>
+              <Nav.Link href="#bookTaxi" className="custom-nav-link" onClick={() => setExpanded(false)}>Book Taxi</Nav.Link>
+              <Nav.Link href="#reviews" className="custom-nav-link" onClick={() => setExpanded(false)}>Reviews</Nav.Link>
+
+              {/* WhatsApp */}
               <a
                 href="https://wa.me/"
                 className="whatsapp-nav-btn"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => setExpanded(false)}
               >
                 💬 WhatsApp
               </a>
+
+              {/* MOBILE ONLY: Saved & Favorites */}
+              <div className="mobile-icons">
+
+                <div
+                  className="icon-btn"
+                  onClick={() => {
+                    setExpanded(false);
+                    navigate("/saved");
+                  }}
+                >
+                  <FaBookmark size={20} /> <span>Saved</span>
+                </div>
+
+                <div
+                  className="icon-btn"
+                  onClick={() => {
+                    setExpanded(false);
+                    navigate("/favorites");
+                  }}
+                >
+                  <FaHeart size={20} /> <span>Favorites</span>
+                </div>
+
+              </div>
+
             </Nav>
 
-            {/* Right Icons — AUTH LOGIC UNTOUCHED */}
-            <Nav className="d-flex align-items-center gap-3">
+            {/* DESKTOP ONLY (keep your original icons here) */}
+            <Nav className="d-none d-lg-flex align-items-center gap-3">
 
-              {/* Saved */}
               <div className="icon-btn" onClick={() => navigate("/saved")}>
                 <FaBookmark size={22} />
               </div>
 
-              {/* Favourites */}
               <div className="icon-btn" onClick={() => navigate("/favorites")}>
                 <FaHeart size={22} />
               </div>
 
-              {/* User — UNTOUCHED */}
+              {/* user block unchanged */}
               {user ? (
                 <div className="d-flex align-items-center gap-2">
                   <Dropdown align="end">
@@ -74,12 +108,8 @@ const NavbarComponent = () => {
                       <FaCircleUser size={30} />
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="user-dropdown text-center">
-                      <Dropdown.Item onClick={() => navigate("/profile")}>
-                        Profile
-                      </Dropdown.Item>
-                      <Dropdown.Item onClick={() => setShow(true)}>
-                        Logout
-                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => navigate("/profile")}>Profile</Dropdown.Item>
+                      <Dropdown.Item onClick={() => setShow(true)}>Logout</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <span className="user-name">{user.name}</span>
@@ -90,20 +120,20 @@ const NavbarComponent = () => {
                     <FaCircleUser size={30} />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => navigate("/login")}>
-                      Login
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => navigate("/register")}>
-                      Register
-                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate("/login")}>Login</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate("/register")}>Register</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               )}
 
             </Nav>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+
+
 
       {/* Logout Modal — UNTOUCHED */}
       <Modal show={show} onHide={() => setShow(false)} centered>

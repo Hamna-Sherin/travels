@@ -96,7 +96,7 @@ const AboutSearch = () => {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-
+                                    
                                     <div className="text-center mt-2">
                                         <Button className="search-btn w-75">
                                             <FaSearch /> FIND NOW

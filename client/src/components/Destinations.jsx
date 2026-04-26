@@ -31,9 +31,9 @@ const Destinations = () => {
     }, []);
 
     useEffect(() => {
-    const favItems = JSON.parse(localStorage.getItem("favourites")) || [];
-    setFavourites(favItems.map(item => item._id));
-}, []);
+        const favItems = JSON.parse(localStorage.getItem("favourites")) || [];
+        setFavourites(favItems.map(item => item._id));
+    }, []);
 
     const toggleFavourite = (item) => {
         let favItems = JSON.parse(localStorage.getItem("favourites")) || [];
@@ -76,7 +76,8 @@ const Destinations = () => {
             <div className="text-center mb-5">
                 <span className="section-tag">What To See</span>
                 <h2 className="section-title">Explore Our Tourist Destinations</h2>
-                <hr className="services-divider" />
+                {/* <hr className="services-divider" /> */}
+                <div className="underline mx-auto my-3"></div>
                 <p className="text-muted mx-auto" style={{ maxWidth: "520px", fontSize: "0.97rem", lineHeight: "1.8" }}>
                     Discover handpicked destinations across Kerala — from serene backwaters
                     to misty hilltops, every place tells a story.

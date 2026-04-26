@@ -17,50 +17,41 @@ const DestinationDetails = () => {
     if (!destination) return <h3 className="text-center mt-5">Loading...</h3>;
 
     return (
-        <div className="container mt-3 ">
+        <div className="container mt-3">
 
-            {/* Title */}
-            <h1 className="text-center fw-bold mb-4">
-                {destination.Destination}
-            </h1>
+  {/* Title */}
+  <h1 className="text-center fw-bold mb-4">
+    {destination.Destination}
+  </h1>
 
-            <div
-                className="d-flex flex-wrap align-items-center shadow rounded overflow-hidden"
-                style={{ background: "#fff" }}
-            >
+  <div className="shadow rounded overflow-hidden bg-white">
 
-                {/* Image */}
-                <div className="w-50 p-3">
-                    <img
-                        src={destination.Image}
-                        alt=""
-                        className="w-100 rounded"
-                        style={{
-                            height: "400px",
-                            objectFit: "cover"
-                        }}
-                    />
-                </div>
+    <div className="row align-items-center">
 
-                {/* Content */}
-                <div className="w-50 p-4">
-                    <p
-                        style={{
-                            lineHeight: "1.8",
-                            fontSize: "16px",
-                            color: "#555",
-                            textAlign: "justify"
-                        }}
-                    >
-                        {destination.Details}
-                    </p>
-                </div>
+      {/* Image */}
+      <div className="col-lg-6 col-12 p-3">
+        <img
+          src={destination.Image}
+          alt=""
+          className="img-fluid rounded destination-detail-img"
+        />
+      </div>
 
-            </div>
-            <div className="mt-3 text-center">
-                <Button onClick={() => navigate(-1)}>← Back</Button>
-            </div>
-        </div>
+      {/* Content */}
+      <div className="col-lg-6 col-12 p-4">
+        <p className="destination-detail-text">
+          {destination.Details}
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div className="mt-3 text-center">
+    <Button onClick={() => navigate(-1)}>← Back</Button>
+  </div>
+
+</div>
     );
 };
 

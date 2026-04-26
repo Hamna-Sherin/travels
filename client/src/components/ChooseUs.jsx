@@ -15,9 +15,8 @@ const ChooseUs = () => {
                     <h2 className="fw-bold">Why Choose Us</h2>
                     <div className="underline mx-auto my-3"></div>
                     <p className="text-muted w-75 mx-auto">
-                        Lorem Ipsum is simply dummy text the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s,
+                        Discover the best of Kerala with hassle-free planning, expert support,
+                        and travel packages designed to suit every budget and preference.
                     </p>
                 </div>
 
@@ -48,7 +47,7 @@ const ChooseUs = () => {
                         <Card className="choose-card text-center h-100">
                             <Card.Body>
                                 {/* <FaAward className="icon mb-3" /> */}
-                                <FaUserTie className="icon mb-3"/>
+                                <FaUserTie className="icon mb-3" />
                                 <Card.Title className="fw-semibold">
                                     {/* Award Winning Service */}
                                     Trusted Travel Guides
@@ -70,19 +69,19 @@ const ChooseUs = () => {
                             <Card.Body>
                                 {/* <FaGlobe className="icon mb-3" /> */}
                                 {/* <BsGlobeAmericas className="icon mb-3" /> */}
-                                <FaMapMarkerAlt className="icon mb-3"/>
+                                <FaMapMarkerAlt className="icon mb-3" />
 
 
                                 <Card.Title className="fw-semibold">
                                     {/* Worldwide Coverage */}
-                                    Explore Kerala 
+                                    Explore Kerala
                                 </Card.Title>
                                 <Card.Text className="text-muted">
                                     {/* 1,200,000 hotels in more than 200 countries and
                   regions & flights to over 5,000 cities. */}
                                     {/* Discover breathtaking destinations including hill stations,
                                     waterfalls, backwaters, beaches, and wildlife parks. */}
-                                     Discover waterfalls, backwaters, beaches, and hill stations.
+                                    Discover waterfalls, backwaters, beaches, and hill stations.
                                 </Card.Text>
                             </Card.Body>
                         </Card>

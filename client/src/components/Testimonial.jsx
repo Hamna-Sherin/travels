@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const testimonials = [
@@ -36,19 +36,221 @@ const testimonials = [
   },
 ];
 
+// const Testimonial = () => {
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   const nextSlide = () => {
+//     if (currentIndex < testimonials.length - 2) {
+//       setCurrentIndex(currentIndex + 1);
+//     }
+//   };
+
+//   const prevSlide = () => {
+//     if (currentIndex > 0) {
+//       setCurrentIndex(currentIndex - 1);
+//     }
+//   };
+
+//   return (
+//     <section id="reviews" className="testimonial-section">
+//       <div className="container">
+
+//         {/* Header */}
+//         <div className="section-header">
+//           <span className="section-tag">Traveller Reviews</span>
+//           <h2>What Our Guests Say</h2>
+//           <div className="section-line"></div>
+//           <p>
+//             Real experiences from travellers who explored Kerala with Rafco Travels —
+//             from backwaters to hilltops.
+//           </p>
+//         </div>
+
+//         {/* Slider */}
+//         <div className="slider-wrapper">
+
+//           <button
+//             className="nav-btn"
+//             onClick={prevSlide}
+//             disabled={currentIndex === 0}
+//           >
+//             <IoIosArrowBack />
+//           </button>
+
+//           <div className="slider">
+//             <div
+//               className="slider-track"
+//               style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+//             >
+//               {testimonials.map((item) => (
+//                 <div className="testimonialcard" key={item.id}>
+//                   <div className="testi-card-inner">
+
+//                     <span className="testi-quote">"</span>
+
+//                     <p className="testi-text">{item.text}</p>
+
+//                     <div className="testi-stars">
+//                       {"★".repeat(item.stars)}
+//                     </div>
+
+//                     <div className="testi-author">
+//                       <img
+//                         src={item.image}
+//                         alt={item.name}
+//                         className="testi-avatar"
+//                       />
+//                       <div>
+//                         <div className="testi-name">{item.name}</div>
+//                         <div className="testi-role">📍 {item.role}</div>
+//                       </div>
+//                     </div>
+
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           <button
+//             className="nav-btn"
+//             onClick={nextSlide}
+//             disabled={currentIndex >= testimonials.length - 2}
+//           >
+//             <IoIosArrowForward />
+//           </button>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Testimonial;
+
+
+// const Testimonial = () => {
+//   const [currentIndex, setCurrentIndex] = useState(0);
+  
+
+//   // LOOPING VERSION (better UX)
+//   const nextSlide = () => {
+//     setCurrentIndex((prev) =>
+//       prev >= testimonials.length - 2 ? 0 : prev + 1
+//     );
+//   };
+
+//   const prevSlide = () => {
+//     setCurrentIndex((prev) =>
+//       prev === 0 ? testimonials.length - 2 : prev - 1
+//     );
+//   };
+
+//   return (
+//     <section id="reviews" className="testimonial-section">
+//       <div className="container">
+
+//         {/* Header */}
+//         <div className="section-header">
+//           <span className="section-tag">Traveller Reviews</span>
+//           <h2>What Our Guests Say</h2>
+//           <div className="section-line"></div>
+//           <p>
+//             Real experiences from travellers who explored Kerala with Rafco Travels —
+//             from backwaters to hilltops.
+//           </p>
+//         </div>
+
+//         {/* Slider */}
+//         <div className="slider-wrapper">
+
+//           {/* LEFT ARROW */}
+//           <button
+//             className="nav-btn prev-btn"
+//             onClick={prevSlide}
+//           >
+//             <IoIosArrowBack />
+//           </button>
+
+//           <div className="slider">
+//             <div
+//               className="slider-track"
+//               style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+//             >
+//               {testimonials.map((item) => (
+//                 <div className="testimonialcard" key={item.id}>
+//                   <div className="testi-card-inner">
+
+//                     <span className="testi-quote">"</span>
+
+//                     <p className="testi-text">{item.text}</p>
+
+//                     <div className="testi-stars">
+//                       {"★".repeat(item.stars)}
+//                     </div>
+
+//                     <div className="testi-author">
+//                       <img
+//                         src={item.image}
+//                         alt={item.name}
+//                         className="testi-avatar"
+//                       />
+//                       <div>
+//                         <div className="testi-name">{item.name}</div>
+//                         <div className="testi-role">📍 {item.role}</div>
+//                       </div>
+//                     </div>
+
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* RIGHT ARROW */}
+//           <button
+//             className="nav-btn next-btn"
+//             onClick={nextSlide}
+//           >
+//             <IoIosArrowForward />
+//           </button>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Testimonial;
+
+
 const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
+  // detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const itemsPerView = isMobile ? 1 : 2;
+
+  // LOOPING LOGIC (fixed)
   const nextSlide = () => {
-    if (currentIndex < testimonials.length - 2) {
-      setCurrentIndex(currentIndex + 1);
-    }
+    setCurrentIndex((prev) =>
+      prev >= testimonials.length - itemsPerView ? 0 : prev + 1
+    );
   };
 
   const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+    setCurrentIndex((prev) =>
+      prev === 0 ? testimonials.length - itemsPerView : prev - 1
+    );
   };
 
   return (
@@ -69,18 +271,19 @@ const Testimonial = () => {
         {/* Slider */}
         <div className="slider-wrapper">
 
-          <button
-            className="nav-btn"
-            onClick={prevSlide}
-            disabled={currentIndex === 0}
-          >
+          {/* LEFT */}
+          <button className="nav-btn prev-btn" onClick={prevSlide}>
             <IoIosArrowBack />
           </button>
 
           <div className="slider">
             <div
               className="slider-track"
-              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (isMobile ? 100 : 50)
+                }%)`
+              }}
             >
               {testimonials.map((item) => (
                 <div className="testimonialcard" key={item.id}>
@@ -112,11 +315,8 @@ const Testimonial = () => {
             </div>
           </div>
 
-          <button
-            className="nav-btn"
-            onClick={nextSlide}
-            disabled={currentIndex >= testimonials.length - 2}
-          >
+          {/* RIGHT */}
+          <button className="nav-btn next-btn" onClick={nextSlide}>
             <IoIosArrowForward />
           </button>
 

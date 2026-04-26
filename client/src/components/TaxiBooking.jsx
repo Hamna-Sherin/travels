@@ -255,6 +255,7 @@ const TaxiBooking = () => {
                                                 name="passengers"
                                                 value={form.passengers}
                                                 onChange={handleChange}
+                                                placeholder="passengers"
                                             />
                                         </Form.Group>
                                     </Col>
