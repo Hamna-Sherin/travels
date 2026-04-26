@@ -11,6 +11,7 @@ const NavbarComponent = () => {
   const [show, setShow] = useState(false);
   const savedItems = JSON.parse(localStorage.getItem("saved")) || [];
   const favItems = JSON.parse(localStorage.getItem("favourites")) || [];
+  const [expanded, setExpanded] = useState(false);
 
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const NavbarComponent = () => {
 
   return (
     <div>
-      <Navbar expand="lg" className="custom-navbar shadow-sm fixed-top">
+      <Navbar expand="lg" expanded={expanded} className="custom-navbar shadow-sm fixed-top" >
         <Container fluid className="px-4">
 
           {/* Logo */}
@@ -31,17 +32,17 @@ const NavbarComponent = () => {
             Rafco <span>Travels</span>
           </Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="main-navbar" />
+          <Navbar.Toggle aria-controls="main-navbar" onClick={() => setExpanded(!expanded)} />
 
           <Navbar.Collapse id="main-navbar">
 
             {/* Center Menu */}
             <Nav className="mx-auto gap-3 center-nav">
-              <Nav.Link href="#home" className="custom-nav-link">Home</Nav.Link>
-              <Nav.Link href="#why-us" className="custom-nav-link">Services</Nav.Link>
-              <Nav.Link href="#packages" className="custom-nav-link">Packages</Nav.Link>
-              <Nav.Link href="#bookTaxi" className="custom-nav-link">Book Taxi</Nav.Link>
-              <Nav.Link href="#reviews" className="custom-nav-link">Reviews</Nav.Link>
+              <Nav.Link href="#home" className="custom-nav-link onClick={() => setExpanded(false)}">Home</Nav.Link>
+              <Nav.Link href="#why-us" className="custom-nav-link onClick={() => setExpanded(false)}">Services</Nav.Link>
+              <Nav.Link href="#packages" className="custom-nav-link onClick={() => setExpanded(false)}">Packages</Nav.Link>
+              <Nav.Link href="#bookTaxi" className="custom-nav-link onClick={() => setExpanded(false)}">Book Taxi</Nav.Link>
+              <Nav.Link href="#reviews" className="custom-nav-link onClick={() => setExpanded(false)}">Reviews</Nav.Link>
               <a
                 href="https://wa.me/"
                 className="whatsapp-nav-btn"

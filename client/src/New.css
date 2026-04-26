@@ -125,7 +125,7 @@
   transform: scale(1.15);
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     .custom-navbar {
         padding: 0 20px !important;
         height: auto !important;
@@ -137,6 +137,17 @@
 
     .custom-nav-link {
         padding: 8px 0 !important;
+    }
+} */
+
+@media (max-width: 991px) {
+    .center-nav {
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+
+    .icon-btn {
+        padding: 8px 0;
     }
 }
 
