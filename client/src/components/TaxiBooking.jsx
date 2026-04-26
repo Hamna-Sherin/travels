@@ -19,7 +19,7 @@ const TaxiBooking = () => {
         pickupDate: "",
         pickupTime: "",
         tripType: "One Way",
-        passengers: 1,
+        passengers: "",
         vehicleType: "",
         name: "",
         phone: ""
@@ -224,6 +224,7 @@ const TaxiBooking = () => {
                                                 name="pickupDate"
                                                 value={form.pickupDate}
                                                 onChange={handleChange}
+                                                placeholder="Pickup Date"
                                             />
                                         </Form.Group>
                                     </Col>
@@ -235,6 +236,7 @@ const TaxiBooking = () => {
                                                 name="pickupTime"
                                                 value={form.pickupTime}
                                                 onChange={handleChange}
+                                                placeholder="Pickup Time"
                                             />
                                         </Form.Group>
                                     </Col>
