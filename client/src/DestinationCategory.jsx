@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Card, Row, Col, Button, Spinner } from "react-bootstrap";
 
 const DestinationCategory = () => {
   const { category } = useParams();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +17,13 @@ const DestinationCategory = () => {
       .then(res => setData(res.data.destinations))
       .catch(err => console.log(err));
   }, [category]);
+
+  if (!data)
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "70vh" }}>
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
 
   return (
     <div className="container mt-5">

@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Card, Row, Col, Button, Spinner } from "react-bootstrap";
 
 const DistrictDestinations = () => {
     const { name } = useParams(); // district name
-    const [destinations, setDestinations] = useState([]);
+    const [destinations, setDestinations] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,6 +17,13 @@ const DistrictDestinations = () => {
             .then(res => setDestinations(res.data.destinations))
             .catch(err => console.log(err));
     }, [name]);
+
+     if (!destinations)
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "70vh" }}>
+        <Spinner animation="border" variant="success" />
+      </div>
+    );
 
     return (
         <div className="container mt-5">

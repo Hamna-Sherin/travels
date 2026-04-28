@@ -261,6 +261,25 @@ app.delete('/deletePackage/:id', (req, res) => {
         .catch(err => res.json(err))
 })
 
+app.put("/users/:id", async (req, res) => {
+    try {
+        const { name, email, phone, location } = req.body;
+
+        const updated = await UserModel.findByIdAndUpdate(
+            req.params.id,
+            { name, email, phone, location },
+            { new: true }
+        );
+
+        if (!updated) return res.status(404).json({ message: "User not found" });
+
+        res.json({ message: "Profile updated", user: updated });
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 app.listen(5000, () => {
     console.log("Server running on port 5000");
 });

@@ -14,9 +14,12 @@ const DestinationDetails = () => {
       .catch(err => console.log(err));
   }, [id]);
 
-  if (!destination) return
-  <Spinner animation="border" variant="success" />
-
+if (!destination)
+  return (
+    <div className="d-flex justify-content-center align-items-center" style={{ height: "70vh" }}>
+      <Spinner animation="border" variant="success" />
+    </div>
+  );
   //<h3 className="text-center mt-5">Loading...</h3>;
 
   return (
