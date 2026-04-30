@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 
 const PackageDetails = () => {
@@ -14,7 +14,12 @@ const PackageDetails = () => {
             .catch(err => console.log(err));
     }, [id]);
 
-    if (!pkg) return <h3 className="text-center mt-5">Loading...</h3>;
+    if (!pkg)
+        return (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "70vh" }}>
+                <Spinner animation="border" variant="success" />
+            </div>
+        )
 
     return (
         <Container className="mt-4">

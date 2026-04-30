@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -21,15 +22,17 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("https://travels-bp73.onrender.com/register", form);
+            await axios.post("https://travels-bp73.onrender.com/register", form);
 
-            alert("Registered Successfully ✅");
+            toast.success("Registered Successfully ✅");
 
-            navigate("/login");
+            setTimeout(() => {
+                navigate("/login");
+            }, 1500);
 
         } catch (err) {
             console.log(err);
-            alert(err.response?.data?.message || "Registration Failed ❌");
+            toast.error(err.response?.data?.message || "Registration Failed ❌");
         }
     };
 

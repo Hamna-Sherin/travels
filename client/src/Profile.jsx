@@ -8,6 +8,7 @@ import {
     FaTrash, FaEye
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const bookingHistory = [
     { id: "RFT-001", destination: "Munnar Hill Escape", date: "12 Mar 2025", amount: "₹6,499", status: "confirmed" },
@@ -64,7 +65,7 @@ const Profile = () => {
             setEditing(false);
         } catch (err) {
             console.log(err);
-            alert("Failed to update profile. Please try again.");
+            toast.error("Failed to update profile. Please try again.");
         }
     };
 

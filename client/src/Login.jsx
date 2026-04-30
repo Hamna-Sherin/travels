@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Login = () => {
 
     } catch (err) {
         console.log(err);
-        alert(err.response?.data?.message || "Login failed ❌");
+        toast.error(err.response?.data?.message || "Login failed ❌");
     }
 };
 

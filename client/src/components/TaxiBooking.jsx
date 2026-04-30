@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const TaxiBooking = () => {
     const [form, setForm] = useState({
@@ -35,7 +36,7 @@ const TaxiBooking = () => {
         try {
             const res = await axios.post("https://travels-bp73.onrender.com/booking", form);
 
-            alert("Booking Confirmed ✅");
+            toast.success("Booking Confirmed ✅");
             console.log(res.data);
             setForm({
                 pickupStreet: "",
@@ -61,7 +62,7 @@ const TaxiBooking = () => {
 
         } catch (err) {
             console.log(err);
-            alert("Booking Failed ❌");
+            toast.error("Booking Failed ❌");
         }
     };
 
