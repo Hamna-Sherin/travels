@@ -161,6 +161,68 @@ body {
     transform: scale(1.15);
 }
 
+/* SAVED PAGE TABS */
+.saved-tab-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.saved-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  padding: 9px 24px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.saved-tab.active {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: white;
+}
+
+.saved-tab-count {
+  background: var(--gold);
+  color: #2a1a00;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 7px;
+}
+
+/* SAVED PACKAGE REMOVE ICON */
+.saved-pkg-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: var(--teal);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s, color 0.2s;
+}
+
+.saved-pkg-remove:hover {
+  background: var(--teal);
+  color: white;
+}
 
 
 /* @media (max-width: 991px) {
@@ -740,7 +802,7 @@ body {
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .section-header h2 {
@@ -1060,7 +1122,7 @@ body {
    ================================ */
 
 .destinations-section {
-    padding: 60px 0;
+    padding: 20px 0;
     background: #f9f7f2;
     font-family: 'Inter', sans-serif;
 }
@@ -2535,4 +2597,53 @@ body {
     color: var(--teal);
     opacity: 0.5;
     margin-bottom: 8px;
+}
+
+/* FULL CENTER WRAPPER */
+.empty-state-wrapper {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ICON */
+.empty-icon {
+    /* font-size: 60px; */
+    color: #8fa6a3;
+    opacity: 0.6;
+    margin-bottom: 20px;
+}
+
+/* TITLE */
+.empty-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* SUBTEXT */
+.empty-sub {
+    color: #777;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+/* BUTTON */
+.btn-browse {
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: 2px solid #1f6f5d;
+    background: transparent;
+    color: #1f6f5d;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-browse:hover {
+    background: #1f6f5d;
+    color: #fff;
 }

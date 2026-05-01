@@ -10,23 +10,44 @@ const Destinations = () => {
     const [deleteId, setdeleteId] = useState()
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
+    const [search, setSearch] = useState("");
 
     const limit = 3
 
-    useEffect(() => {
-        axios.get(`https://travels-bp73.onrender.com/destination`, {
-            params: {
-                page,
-                limit,
-            }
-        })
-            .then(result => {
-                setDestinations(result.data.destinations)
-                setTotalPages(result.data.totalPages)
+    // useEffect(() => {
+    //     axios.get(`https://travels-bp73.onrender.com/destination`, {
+    //         params: {
+    //             page,
+    //             limit,
+    //         }
+    //     })
+    //         .then(result => {
+    //             setDestinations(result.data.destinations)
+    //             setTotalPages(result.data.totalPages)
 
+    //         })
+    //         .catch(err => console.log(err))
+    // }, [page])
+
+    useEffect(() => {
+        const delayDebounce = setTimeout(() => {
+            axios.get(`https://travels-bp73.onrender.com/destination`, {
+                params: {
+                    page,
+                    limit,
+                    search // ✅ send search to backend
+                }
             })
-            .catch(err => console.log(err))
-    }, [page])
+                .then(result => {
+                    setDestinations(result.data.destinations);
+                    setTotalPages(result.data.totalPages);
+                })
+                .catch(err => console.log(err));
+        }, 400); // debounce
+
+        return () => clearTimeout(delayDebounce);
+
+    }, [page, search]);
 
     const handleClose = () => setShow(false);
     const handleShow = (id) => {
@@ -59,8 +80,32 @@ const Destinations = () => {
                 <>
 
                     {/* HEADER */}
-                    <div className="d-flex justify-content-between align-items-center mb-4">
+                    {/* <div className="d-flex justify-content-between align-items-center mb-4">
                         <h3>Destinations</h3>
+
+                        <Link to={"/addDestination"}>
+                            <Button variant="primary">
+                                + Add Destination
+                            </Button>
+                        </Link>
+
+                    </div> */}
+
+                    <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+
+                        <h3>Destinations</h3>
+
+                        <input
+                            type="text"
+                            placeholder="Search destination..."
+                            className="form-control w-auto"
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setPage(1); // ✅ reset page when searching
+                            }}
+                        />
+                    
 
                         <Link to={"/addDestination"}>
                             <Button variant="primary">

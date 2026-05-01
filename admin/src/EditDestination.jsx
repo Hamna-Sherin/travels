@@ -40,7 +40,7 @@ const EditDestination = () => {
         const data = new FormData()
         data.append("file", file)
         data.append("upload_preset", "sample_upload")
-        data.append("cloud_name", "dg6st72lq")
+        // data.append("cloud_name", "dg6st72lq")
 
         try {
             const res = await fetch("https://api.cloudinary.com/v1_1/dg6st72lq/image/upload", {
@@ -49,8 +49,9 @@ const EditDestination = () => {
             })
 
             const uploadedImage = await res.json()
+            console.log(uploadedImage); // 🔍 VERY IMPORTANT
             setImage(uploadedImage.secure_url);
-            console.log(imageURL);
+            console.log(uploadedImage.secure_url); // ✅ correct
         }
 
         catch (error) {
@@ -73,7 +74,7 @@ const EditDestination = () => {
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
             <Form className="w-50 p-4 border rounded" onSubmit={update}>
-                
+
                 <h2 className="text-center mb-4">Edit Destination</h2>
 
                 <Form.Group className="mb-3" controlId="formBasicDestination">

@@ -19,6 +19,42 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.log(err));
 
 
+// app.get('/destination', async (req, res) => {
+//     try {
+//         const page = parseInt(req.query.page) || 1;
+//         const limit = parseInt(req.query.limit) || 5;
+//         const skip = (page - 1) * limit;
+
+//         const location = req.query.location || "";
+//         const category = req.query.category || "";
+
+//         let query = {};
+
+//         if (location) {
+//             query.Location = location;
+//         }
+
+//         if (category) {
+//             query.Category = { $regex: category, $options: "i" };
+//         }
+
+//         const total = await DestinationModel.countDocuments(query);
+
+//         const destinations = await DestinationModel.find(query)
+//             .skip(skip)
+//             .limit(limit);
+
+//         res.json({
+//             destinations,
+//             totalPages: Math.ceil(total / limit),
+//             currentPage: page
+//         });
+
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
 app.get('/destination', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -27,15 +63,27 @@ app.get('/destination', async (req, res) => {
 
         const location = req.query.location || "";
         const category = req.query.category || "";
+        const search = req.query.search || ""; // ✅ NEW
 
         let query = {};
 
+        // 🔹 LOCATION FILTER (exact match)
         if (location) {
             query.Location = location;
         }
 
+        // 🔹 CATEGORY FILTER (case-insensitive)
         if (category) {
             query.Category = { $regex: category, $options: "i" };
+        }
+
+        // 🔹 SEARCH (multi-field)
+        if (search) {
+            query.$or = [
+                { Destination: { $regex: search, $options: "i" } },
+                { Location: { $regex: search, $options: "i" } },
+                { Category: { $regex: search, $options: "i" } }
+            ];
         }
 
         const total = await DestinationModel.countDocuments(query);
