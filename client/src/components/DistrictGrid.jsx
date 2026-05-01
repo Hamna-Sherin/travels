@@ -24,7 +24,7 @@ const DistrictGrid = () => {
         { title: "Kasargod", image: destination1 },
         { title: "Kannur", image: destination2 },
         { title: "Wayanad", image: destination3 },
-        { title: "Kozhikkode", image: destination4 },
+        { title: "Kozhikode", image: destination4 },
         { title: "Malappuram", image: destination5 },
         { title: "Palakkad", image: destination6 },
         { title: "Thrissur", image: destination7 },
