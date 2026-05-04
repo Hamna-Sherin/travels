@@ -8,7 +8,7 @@ const AdminLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="w-75 flex-grow-1" style={{marginLeft:"-30px"}}>
+      <div className="w-75 flex-grow-1" style={{marginLeft:"-70px"}}>
         <Outlet />
       </div>
     </div>

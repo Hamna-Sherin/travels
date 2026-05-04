@@ -15,6 +15,7 @@ import Favorites from './Favorites';
 import Profile from './Profile';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ContactUs from './ContactUs';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/saved" element={<Saved />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='contactUs' element={<ContactUs />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer position="top-center" autoClose={3000} />
