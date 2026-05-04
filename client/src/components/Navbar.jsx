@@ -49,8 +49,7 @@ const NavbarComponent = () => {
               <Nav.Link href="#why-us" className="custom-nav-link" onClick={() => setExpanded(false)}>Services</Nav.Link>
               <Nav.Link href="#packages" className="custom-nav-link" onClick={() => setExpanded(false)}>Packages</Nav.Link>
               <Nav.Link href="#bookTaxi" className="custom-nav-link" onClick={() => setExpanded(false)}>Book Taxi</Nav.Link>
-              <Nav.Link href="/contactUs" className="custom-nav-link" onClick={() => setExpanded(false)}>Contact Us</Nav.Link>
-
+              <Nav.Link as={Link} to="/contactUs" className="custom-nav-link" onClick={() => setExpanded(false)}>Contact Us</Nav.Link>
               {/* WhatsApp */}
               <a
                 href="https://wa.me/"
