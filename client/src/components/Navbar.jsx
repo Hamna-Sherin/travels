@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Container, Dropdown, Modal, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
