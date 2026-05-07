@@ -412,7 +412,52 @@ app.delete("/enquiry/:id", async (req, res) => {
   res.json({ message: "Deleted successfully" });
 });
 
+/* ================= PACKAGE BOOKINGS ================= */
 
+// CREATE PACKAGE BOOKING
+app.post("/package-booking", async (req, res) => {
+  try {
+    const newBooking = new BookingModel(req.body);
+    await newBooking.save();
+    res.status(201).json({ message: "Package booking saved" });
+  } catch (err) {
+    res.status(500).json({ message: "Error saving booking" });
+  }
+});
+
+// GET ALL PACKAGE BOOKINGS
+app.get("/package-bookings", async (req, res) => {
+  try {
+    const bookings = await BookingModel.find().sort({ createdAt: -1 });
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// UPDATE STATUS
+app.put("/package-bookings/:id", async (req, res) => {
+  try {
+    const updated = await BookingModel.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// DELETE BOOKING
+app.delete("/package-bookings/:id", async (req, res) => {
+  try {
+    await BookingModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");
