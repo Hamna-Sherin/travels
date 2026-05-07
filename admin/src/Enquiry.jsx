@@ -1088,7 +1088,7 @@ export default function AdminEnquiries() {
         async function load() {
             setLoading(true);
             try {
-                const res  = await fetch("https://travels-bp73.onrender.com/");
+                const res  = await fetch("https://travels-bp73.onrender.com/enquiry");
                 const data = await res.json();
                 setEnquiries(data.data || []);
             } catch (err) {
@@ -1128,7 +1128,7 @@ export default function AdminEnquiries() {
 
     const handleStatusChange = async (id, newStatus) => {
     try {
-        await fetch(`https://travels-bp73.onrender.com//${id}`, {
+        await fetch(`https://travels-bp73.onrender.com/enquiry/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -1157,7 +1157,7 @@ export default function AdminEnquiries() {
 
     const handleDelete = async (id) => {
     try {
-        await fetch(`https://travels-bp73.onrender.com//${id}`, {
+        await fetch(`https://travels-bp73.onrender.com/enquiry/${id}`, {
             method: "DELETE"
         });
 

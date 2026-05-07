@@ -13,6 +13,7 @@ import AddPackage from './AddPackages';
 import EditPackage from './EditPckages';
 import AdminEnquiries from './Enquiry';
 import EnquiriesHeader from './Enquiry';
+import AdminPackageBookings from './PackageBookings';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='addPackage' element={<AddPackage />} />
             <Route path='editPackage/:id' element={<EditPackage/>} />
             <Route path='enquiry' element={<AdminEnquiries />} />
+            <Route path='packageBooking' element={<AdminPackageBookings />} />
           </Route>
         </Routes>
       </BrowserRouter>
