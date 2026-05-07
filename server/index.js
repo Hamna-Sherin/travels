@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const UserModel = require("./models/User");
 const PackageModel = require("./models/Package")
 const EnquiryModel = require("./models/Enquiry")
+const PackageBookingModel = require("./models/Package-Booking");
 
 
 const app = express();
@@ -412,12 +413,12 @@ app.delete("/enquiry/:id", async (req, res) => {
   res.json({ message: "Deleted successfully" });
 });
 
-/* ================= PACKAGE BOOKINGS ================= */
+//* ================= PACKAGE BOOKINGS ================= */
 
-// CREATE PACKAGE BOOKING
+// CREATE
 app.post("/package-booking", async (req, res) => {
   try {
-    const newBooking = new BookingModel(req.body);
+    const newBooking = new PackageBookingModel(req.body);
     await newBooking.save();
     res.status(201).json({ message: "Package booking saved" });
   } catch (err) {
@@ -425,20 +426,20 @@ app.post("/package-booking", async (req, res) => {
   }
 });
 
-// GET ALL PACKAGE BOOKINGS
+// GET
 app.get("/package-bookings", async (req, res) => {
   try {
-    const bookings = await BookingModel.find().sort({ createdAt: -1 });
+    const bookings = await PackageBookingModel.find().sort({ createdAt: -1 });
     res.json(bookings);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// UPDATE STATUS
+// UPDATE
 app.put("/package-bookings/:id", async (req, res) => {
   try {
-    const updated = await BookingModel.findByIdAndUpdate(
+    const updated = await PackageBookingModel.findByIdAndUpdate(
       req.params.id,
       { status: req.body.status },
       { new: true }
@@ -449,10 +450,10 @@ app.put("/package-bookings/:id", async (req, res) => {
   }
 });
 
-// DELETE BOOKING
+// DELETE
 app.delete("/package-bookings/:id", async (req, res) => {
   try {
-    await BookingModel.findByIdAndDelete(req.params.id);
+    await PackageBookingModel.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted successfully" });
   } catch (err) {
     res.status(500).json(err);
