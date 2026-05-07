@@ -12,6 +12,7 @@ import Destinations from './components/Destinations'
 import CategorySection from './components/Categories'
 import TaxiBooking from './components/TaxiBooking'
 import Services from './components/Services'
+import ContactSection from './components/ContactUs'
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
         <TaxiBooking />
         <OfferBanner />
         <Testimonial />
+        <ContactSection />
         <Footer />
     </div>
   )

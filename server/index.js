@@ -7,12 +7,17 @@ const BookingModel = require('./models/Booking')
 const bcrypt = require("bcryptjs");
 const UserModel = require("./models/User");
 const PackageModel = require("./models/Package")
+const EnquiryModel = require("./models/Enquiry")
 
 
 const app = express();
 
+// const enquiryRoutes = require("./routes/enquiryRoutes"); 
+
 app.use(cors());
 app.use(express.json());
+
+// app.use("/api", enquiryRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Connected"))
@@ -163,19 +168,19 @@ app.get("/bookings", async (req, res) => {
 });
 
 app.put("/bookings/:id", async (req, res) => {
-  try {
-    const { status } = req.body;
+    try {
+        const { status } = req.body;
 
-    const updatedBooking = await BookingModel.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true }
-    );
+        const updatedBooking = await BookingModel.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true }
+        );
 
-    res.json(updatedBooking);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+        res.json(updatedBooking);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.post("/register", async (req, res) => {
@@ -327,6 +332,87 @@ app.put("/users/:id", async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
+/* CREATE ENQUIRY */
+// app.post("/", async (req, res) => {
+//     try {
+//         const enquiry = await EnquiryModel.create(req.body);
+//         res.status(201).json({ success: true, data: enquiry });
+//     } catch (err) {
+//         res.status(500).json({ success: false, message: err.message });
+//     }
+// });
+
+/* GET ALL ENQUIRIES */
+// app.get("/", async (req, res) => {
+//     try {
+//         const enquiries = await EnquiryModel.find().sort({ createdAt: -1 });
+//         res.json({ success: true, data: enquiries });
+//     } catch (err) {
+//         res.status(500).json({ success: false });
+//     }
+// });
+
+// /* UPDATE STATUS */
+// app.put("/:id", async (req, res) => {
+//     try {
+//         const updated = await EnquiryModel.findByIdAndUpdate(
+//             req.params.id,
+//             { status: req.body.status },
+//             { new: true }
+//         );
+//         res.json({ success: true, data: updated });
+//     } catch (err) {
+//         res.status(500).json({ success: false });
+//     }
+// });
+
+// /* DELETE */
+// app.delete("/:id", async (req, res) => {
+//     try {
+//         await EnquiryModel.findByIdAndDelete(req.params.id);
+//         res.json({ success: true });
+//     } catch (err) {
+//         res.status(500).json({ success: false });
+//     }
+// });
+
+app.post("/enquiry", async (req, res) => {
+      console.log(req.body); 
+
+  try {
+    const newEnquiry = new EnquiryModel(req.body);
+    await newEnquiry.save();
+    res.status(201).json({ message: "Enquiry saved" });
+  } catch (err) {
+    res.status(500).json({ message: "Error saving enquiry" });
+  }
+});
+
+app.get("/enquiry", async (req, res) => {
+  const data = await EnquiryModel.find().sort({ createdAt: -1 });
+  res.json({ data });
+});
+
+app.put("/enquiry/:id", async (req, res) => {
+  const { status } = req.body;
+
+  const updated = await EnquiryModel.findByIdAndUpdate(
+    req.params.id,
+    { status },
+    { new: true }
+  );
+
+  res.json(updated);
+});
+
+app.delete("/enquiry/:id", async (req, res) => {
+  await EnquiryModel.findByIdAndDelete(req.params.id);
+  res.json({ message: "Deleted successfully" });
+});
+
+
 
 app.listen(5000, () => {
     console.log("Server running on port 5000");

@@ -12,6 +12,7 @@ import EditDestination from './EditDestination';
 import AddPackage from './AddPackages';
 import EditPackage from './EditPckages';
 import AdminEnquiries from './Enquiry';
+import EnquiriesHeader from './Enquiry';
 
 const App = () => {
   return (
