@@ -490,8 +490,8 @@ const enquiryClosed = await EnquiryModel.countDocuments({ status: "closed" });
 
     // ✅ Taxi status
     const taxiPending = await BookingModel.countDocuments({ status: "Pending" });
-    const taxiConfirmed = await BookingModel.countDocuments({ status: "confirmed" });
-    const taxiCancelled = await BookingModel.countDocuments({ status: "cancelled" });
+    const taxiConfirmed = await BookingModel.countDocuments({ status: "Confirmed" });
+    const taxiCancelled = await BookingModel.countDocuments({ status: "Cancelled" });
 
     // ✅ Recent activity
     const recentPackage = await PackageBookingModel.find()
