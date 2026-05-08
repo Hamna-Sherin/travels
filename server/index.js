@@ -469,14 +469,14 @@ app.delete("/package-bookings/:id", async (req, res) => {
 
 app.get("/admin/dashboard", async (req, res) => {
   try {
-    // ✅ Correct models
+    // ✅ Correct model usage
     const totalPackages = await PackageModel.countDocuments();
     const totalDestinations = await DestinationModel.countDocuments();
     const totalUsers = await UserModel.countDocuments();
 
     // ✅ Booking counts
     const totalPackageBookings = await PackageBookingModel.countDocuments();
-    const totalTaxiBookings = await BookingModel.countDocuments(); // taxi = BookingModel
+    const totalTaxiBookings = await BookingModel.countDocuments();
 
     // ✅ Package status
     const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
@@ -522,7 +522,7 @@ app.get("/admin/dashboard", async (req, res) => {
     });
 
   } catch (err) {
-    console.error("Dashboard error:", err); // 👈 IMPORTANT
+    console.error("Dashboard error:", err);
     res.status(500).json({ error: err.message });
   }
 });
