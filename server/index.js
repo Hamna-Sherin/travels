@@ -150,6 +150,7 @@ app.get("/destination/:id", async (req, res) => {
 app.post("/booking", async (req, res) => {
     try {
         const booking = new BookingModel(req.body);
+        status: "pending"
         await booking.save();
 
         res.json({ message: "Booking saved successfully" });
