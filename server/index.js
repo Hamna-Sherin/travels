@@ -469,32 +469,32 @@ app.delete("/package-bookings/:id", async (req, res) => {
 
 app.get("/admin/dashboard", async (req, res) => {
   try {
-    // 🔹 Core counts
-    const totalPackages = await Package.countDocuments();
-    const totalDestinations = await Destination.countDocuments();
-    const totalUsers = await User.countDocuments();
+    // ✅ Correct models
+    const totalPackages = await PackageModel.countDocuments();
+    const totalDestinations = await DestinationModel.countDocuments();
+    const totalUsers = await UserModel.countDocuments();
 
-    // 🔹 Booking counts (no need to fetch full data)
-    const totalPackageBookings = await PackageBooking.countDocuments();
-    const totalTaxiBookings = await TaxiBooking.countDocuments();
+    // ✅ Booking counts
+    const totalPackageBookings = await PackageBookingModel.countDocuments();
+    const totalTaxiBookings = await BookingModel.countDocuments(); // taxi = BookingModel
 
-    // 🔹 Status counts (Package)
-    const pkgPending = await PackageBooking.countDocuments({ status: "pending" });
-    const pkgConfirmed = await PackageBooking.countDocuments({ status: "confirmed" });
-    const pkgCancelled = await PackageBooking.countDocuments({ status: "cancelled" });
+    // ✅ Package status
+    const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
+    const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirmed" });
+    const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancelled" });
 
-    // 🔹 Status counts (Taxi)
-    const taxiPending = await TaxiBooking.countDocuments({ status: "pending" });
-    const taxiConfirmed = await TaxiBooking.countDocuments({ status: "confirmed" });
-    const taxiCancelled = await TaxiBooking.countDocuments({ status: "cancelled" });
+    // ✅ Taxi status
+    const taxiPending = await BookingModel.countDocuments({ status: "pending" });
+    const taxiConfirmed = await BookingModel.countDocuments({ status: "confirmed" });
+    const taxiCancelled = await BookingModel.countDocuments({ status: "cancelled" });
 
-    // 🔹 Recent Activity (last 5 from each)
-    const recentPackage = await PackageBooking.find()
+    // ✅ Recent activity
+    const recentPackage = await PackageBookingModel.find()
       .sort({ createdAt: -1 })
       .limit(5)
       .select("name packageName createdAt");
 
-    const recentTaxi = await TaxiBooking.find()
+    const recentTaxi = await BookingModel.find()
       .sort({ createdAt: -1 })
       .limit(5)
       .select("name createdAt");
@@ -504,29 +504,25 @@ app.get("/admin/dashboard", async (req, res) => {
       destinations: totalDestinations,
       users: totalUsers,
 
-      // 🔹 Separate bookings
       packageBookings: totalPackageBookings,
       taxiBookings: totalTaxiBookings,
 
-      // 🔹 Package status
       pkgPending,
       pkgConfirmed,
       pkgCancelled,
 
-      // 🔹 Taxi status
       taxiPending,
       taxiConfirmed,
       taxiCancelled,
 
-      // 🔹 Combined total (optional)
       totalBookings: totalPackageBookings + totalTaxiBookings,
 
-      // 🔹 Recent activity
       recentPackage,
       recentTaxi,
     });
 
   } catch (err) {
+    console.error("Dashboard error:", err); // 👈 IMPORTANT
     res.status(500).json({ error: err.message });
   }
 });
