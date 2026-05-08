@@ -170,7 +170,7 @@ app.get("/bookings", async (req, res) => {
 
 app.delete('/booking/:id', (req, res) => {
     const id = req.params.id;
-    BookingModel.findByIdAndDelete( id )
+    BookingModel.findByIdAndDelete(id)
         .then(bookings => res.json(bookings))
         .catch(err => res.json(err))
 })
@@ -387,155 +387,163 @@ app.put("/users/:id", async (req, res) => {
 // });
 
 app.post("/enquiry", async (req, res) => {
-      console.log(req.body); 
+    console.log(req.body);
 
-  try {
-    const newEnquiry = new EnquiryModel(req.body);
-    await newEnquiry.save();
-    res.status(201).json({ message: "Enquiry saved" });
-  } catch (err) {
-    res.status(500).json({ message: "Error saving enquiry" });
-  }
+    try {
+        const newEnquiry = new EnquiryModel(req.body);
+        await newEnquiry.save();
+        res.status(201).json({ message: "Enquiry saved" });
+    } catch (err) {
+        res.status(500).json({ message: "Error saving enquiry" });
+    }
 });
 
 app.get("/enquiry", async (req, res) => {
-  const data = await EnquiryModel.find().sort({ createdAt: -1 });
-  res.json({ data });
+    const data = await EnquiryModel.find().sort({ createdAt: -1 });
+    res.json({ data });
 });
 
 app.put("/enquiry/:id", async (req, res) => {
-  const { status } = req.body;
+    const { status } = req.body;
 
-  const updated = await EnquiryModel.findByIdAndUpdate(
-    req.params.id,
-    { status },
-    { new: true }
-  );
+    const updated = await EnquiryModel.findByIdAndUpdate(
+        req.params.id,
+        { status },
+        { new: true }
+    );
 
-  res.json(updated);
+    res.json(updated);
 });
 
 app.delete("/enquiry/:id", async (req, res) => {
-  await EnquiryModel.findByIdAndDelete(req.params.id);
-  res.json({ message: "Deleted successfully" });
+    await EnquiryModel.findByIdAndDelete(req.params.id);
+    res.json({ message: "Deleted successfully" });
 });
 
 //* ================= PACKAGE BOOKINGS ================= */
 
 // CREATE
 app.post("/package-booking", async (req, res) => {
-  try {
-    const newBooking = new PackageBookingModel(req.body);
-    await newBooking.save();
-    res.status(201).json({ message: "Package booking saved" });
-  } catch (err) {
-    res.status(500).json({ message: "Error saving booking" });
-  }
+    try {
+        const newBooking = new PackageBookingModel(req.body);
+        await newBooking.save();
+        res.status(201).json({ message: "Package booking saved" });
+    } catch (err) {
+        res.status(500).json({ message: "Error saving booking" });
+    }
 });
 
 // GET
 app.get("/package-bookings", async (req, res) => {
-  try {
-    const bookings = await PackageBookingModel.find().sort({ createdAt: -1 });
-    res.json(bookings);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+        const bookings = await PackageBookingModel.find().sort({ createdAt: -1 });
+        res.json(bookings);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 // UPDATE
 app.put("/package-bookings/:id", async (req, res) => {
-  try {
-    const updated = await PackageBookingModel.findByIdAndUpdate(
-      req.params.id,
-      { status: req.body.status },
-      { new: true }
-    );
-    res.json(updated);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+        const updated = await PackageBookingModel.findByIdAndUpdate(
+            req.params.id,
+            { status: req.body.status },
+            { new: true }
+        );
+        res.json(updated);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 // DELETE
 app.delete("/package-bookings/:id", async (req, res) => {
-  try {
-    await PackageBookingModel.findByIdAndDelete(req.params.id);
-    res.json({ message: "Deleted successfully" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+        await PackageBookingModel.findByIdAndDelete(req.params.id);
+        res.json({ message: "Deleted successfully" });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 app.get("/admin/dashboard", async (req, res) => {
-  try {
-    // ✅ Correct model usage
-    const totalPackages = await PackageModel.countDocuments();
-    const totalDestinations = await DestinationModel.countDocuments();
-    const totalUsers = await UserModel.countDocuments();
-    const totalEnquiries = await EnquiryModel.countDocuments();
+    try {
+        // ✅ Correct model usage
+        const totalPackages = await PackageModel.countDocuments();
+        const totalDestinations = await DestinationModel.countDocuments();
+        const totalUsers = await UserModel.countDocuments();
+        const totalEnquiries = await EnquiryModel.countDocuments();
 
-const enquiryPending = await EnquiryModel.countDocuments({ status: "pending" });
-const enquiryResolved = await EnquiryModel.countDocuments({ status: "resolved" });
-const enquiryClosed = await EnquiryModel.countDocuments({ status: "closed" });
+        const enquiryPending = await EnquiryModel.countDocuments({ status: "pending" });
+        const enquiryResolved = await EnquiryModel.countDocuments({ status: "resolved" });
+        const enquiryClosed = await EnquiryModel.countDocuments({ status: "closed" });
 
-    // ✅ Booking counts
-    const totalPackageBookings = await PackageBookingModel.countDocuments();
-    const totalTaxiBookings = await BookingModel.countDocuments();
+        // ✅ Booking counts
+        const totalPackageBookings = await PackageBookingModel.countDocuments();
+        const totalTaxiBookings = await BookingModel.countDocuments();
 
-    // ✅ Package status
-    const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
-    const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirmed" });
-    const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancelled" });
+        // ✅ Package status
+        const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
+        const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirmed" });
+        const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancelled" });
 
-    // ✅ Taxi status
-    const taxiPending = await BookingModel.countDocuments({ status: "Pending" });
-    const taxiConfirmed = await BookingModel.countDocuments({ status: "Confirmed" });
-    const taxiCancelled = await BookingModel.countDocuments({ status: "Cancelled" });
+        // ✅ Taxi status
+        const taxiPending = await BookingModel.countDocuments({
+            status: { $regex: "^pending$", $options: "i" }
+        });
 
-    // ✅ Recent activity
-    const recentPackage = await PackageBookingModel.find()
-      .sort({ createdAt: -1 })
-      .limit(5)
-      .select("name packageName createdAt");
+        const taxiConfirmed = await BookingModel.countDocuments({
+            status: { $regex: "^confirmed$", $options: "i" }
+        });
 
-    const recentTaxi = await BookingModel.find()
-      .sort({ createdAt: -1 })
-      .limit(5)
-      .select("name createdAt");
+        const taxiCancelled = await BookingModel.countDocuments({
+            status: { $regex: "^cancelled$", $options: "i" }
+        });
 
-    res.json({
-  packages: totalPackages,
-  destinations: totalDestinations,
-  users: totalUsers,
+        // ✅ Recent activity
+        const recentPackage = await PackageBookingModel.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .select("name packageName createdAt");
 
-  // ✅ NEW
-  enquiries: totalEnquiries,
-  enquiryPending,
-  enquiryResolved,
-  enquiryClosed,
+        const recentTaxi = await BookingModel.find()
+            .sort({ createdAt: -1 })
+            .limit(5)
+            .select("name createdAt");
 
-  packageBookings: totalPackageBookings,
-  taxiBookings: totalTaxiBookings,
+        res.json({
+            packages: totalPackages,
+            destinations: totalDestinations,
+            users: totalUsers,
 
-  pkgPending,
-  pkgConfirmed,
-  pkgCancelled,
+            // ✅ NEW
+            enquiries: totalEnquiries,
+            enquiryPending,
+            enquiryResolved,
+            enquiryClosed,
 
-  taxiPending,
-  taxiConfirmed,
-  taxiCancelled,
+            packageBookings: totalPackageBookings,
+            taxiBookings: totalTaxiBookings,
 
-  totalBookings: totalPackageBookings + totalTaxiBookings,
+            pkgPending,
+            pkgConfirmed,
+            pkgCancelled,
 
-  recentPackage,
-  recentTaxi,
-});
+            taxiPending,
+            taxiConfirmed,
+            taxiCancelled,
 
-  } catch (err) {
-    console.error("Dashboard error:", err);
-    res.status(500).json({ error: err.message });
-  }
+            totalBookings: totalPackageBookings + totalTaxiBookings,
+
+            recentPackage,
+            recentTaxi,
+        });
+
+    } catch (err) {
+        console.error("Dashboard error:", err);
+        res.status(500).json({ error: err.message });
+    }
 });
 
 app.listen(5000, () => {
