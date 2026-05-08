@@ -149,8 +149,10 @@ app.get("/destination/:id", async (req, res) => {
 
 app.post("/booking", async (req, res) => {
     try {
-        const booking = new BookingModel(req.body);
-        status: "pending"
+        const booking = new BookingModel({
+            ...req.body,
+            status: "pending"
+        });
         await booking.save();
 
         res.json({ message: "Booking saved successfully" });
@@ -487,7 +489,7 @@ app.get("/admin/dashboard", async (req, res) => {
         // ✅ Package status
         const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
         const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirm" });
-        const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancell" });
+        const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancel" });
 
         const sample = await BookingModel.find().limit(5);
         console.log(sample);
@@ -498,11 +500,11 @@ app.get("/admin/dashboard", async (req, res) => {
         });
 
         const taxiConfirmed = await BookingModel.countDocuments({
-            status: { $regex: "^confirmed$", $options: "i" }
+            status: { $regex: "^confirm$", $options: "i" }
         });
 
         const taxiCancelled = await BookingModel.countDocuments({
-            status: { $regex: "^cancelled$", $options: "i" }
+            status: { $regex: "^cancel$", $options: "i" }
         });
 
         // ✅ Recent activity
