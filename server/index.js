@@ -168,6 +168,13 @@ app.get("/bookings", async (req, res) => {
     }
 });
 
+app.delete('/booking/:id', (req, res) => {
+    const id = req.params.id;
+    BookingModel.findByIdAndDelete( id )
+        .then(bookings => res.json(bookings))
+        .catch(err => res.json(err))
+})
+
 app.put("/bookings/:id", async (req, res) => {
     try {
         const { status } = req.body;
