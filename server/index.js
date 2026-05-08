@@ -473,6 +473,11 @@ app.get("/admin/dashboard", async (req, res) => {
     const totalPackages = await PackageModel.countDocuments();
     const totalDestinations = await DestinationModel.countDocuments();
     const totalUsers = await UserModel.countDocuments();
+    const totalEnquiries = await EnquiryModel.countDocuments();
+
+const enquiryPending = await EnquiryModel.countDocuments({ status: "pending" });
+const enquiryResolved = await EnquiryModel.countDocuments({ status: "resolved" });
+const enquiryClosed = await EnquiryModel.countDocuments({ status: "closed" });
 
     // ✅ Booking counts
     const totalPackageBookings = await PackageBookingModel.countDocuments();
@@ -500,26 +505,32 @@ app.get("/admin/dashboard", async (req, res) => {
       .select("name createdAt");
 
     res.json({
-      packages: totalPackages,
-      destinations: totalDestinations,
-      users: totalUsers,
+  packages: totalPackages,
+  destinations: totalDestinations,
+  users: totalUsers,
 
-      packageBookings: totalPackageBookings,
-      taxiBookings: totalTaxiBookings,
+  // ✅ NEW
+  enquiries: totalEnquiries,
+  enquiryPending,
+  enquiryResolved,
+  enquiryClosed,
 
-      pkgPending,
-      pkgConfirmed,
-      pkgCancelled,
+  packageBookings: totalPackageBookings,
+  taxiBookings: totalTaxiBookings,
 
-      taxiPending,
-      taxiConfirmed,
-      taxiCancelled,
+  pkgPending,
+  pkgConfirmed,
+  pkgCancelled,
 
-      totalBookings: totalPackageBookings + totalTaxiBookings,
+  taxiPending,
+  taxiConfirmed,
+  taxiCancelled,
 
-      recentPackage,
-      recentTaxi,
-    });
+  totalBookings: totalPackageBookings + totalTaxiBookings,
+
+  recentPackage,
+  recentTaxi,
+});
 
   } catch (err) {
     console.error("Dashboard error:", err);
