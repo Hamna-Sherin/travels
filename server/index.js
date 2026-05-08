@@ -486,8 +486,11 @@ app.get("/admin/dashboard", async (req, res) => {
 
         // ✅ Package status
         const pkgPending = await PackageBookingModel.countDocuments({ status: "pending" });
-        const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirmed" });
-        const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancelled" });
+        const pkgConfirmed = await PackageBookingModel.countDocuments({ status: "confirm" });
+        const pkgCancelled = await PackageBookingModel.countDocuments({ status: "cancell" });
+
+        const sample = await BookingModel.find().limit(5);
+        console.log(sample);
 
         // ✅ Taxi status
         const taxiPending = await BookingModel.countDocuments({
