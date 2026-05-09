@@ -495,17 +495,32 @@ app.get("/admin/dashboard", async (req, res) => {
         console.log(sample);
 
         // ✅ Taxi status
-        const taxiPending = await BookingModel.countDocuments({
-            status: { $regex: "^pending$", $options: "i" }
-        });
+        // ✅ CORRECT
+        // ✅ ROBUST TAXI STATUS COUNTS (handles old + new data)
 
-        const taxiConfirmed = await BookingModel.countDocuments({
-            status: { $regex: "^confirm$", $options: "i" }
-        });
+const taxiPending = await BookingModel.countDocuments({
+  $expr: {
+    $eq: [{ $toLower: { $ifNull: ["$status", "pending"] } }, "pending"]
+  }
+});
 
-        const taxiCancelled = await BookingModel.countDocuments({
-            status: { $regex: "^cancel$", $options: "i" }
-        });
+const taxiConfirmed = await BookingModel.countDocuments({
+  $expr: {
+    $in: [
+      { $toLower: { $ifNull: ["$status", ""] } },
+      ["confirmed", "confirm"]
+    ]
+  }
+});
+
+const taxiCancelled = await BookingModel.countDocuments({
+  $expr: {
+    $in: [
+      { $toLower: { $ifNull: ["$status", ""] } },
+      ["cancelled", "cancel"]
+    ]
+  }
+});
 
         // ✅ Recent activity
         const recentPackage = await PackageBookingModel.find()
