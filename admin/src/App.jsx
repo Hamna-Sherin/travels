@@ -29,7 +29,7 @@ const App = () => {
             <Route path="addDestination" element={<AddDestination />} />
             <Route path="editDestination/:id" element={<EditDestination />} />
             <Route path='addPackage' element={<AddPackage />} />
-            <Route path='editPackage/:id' element={<EditPackage/>} />
+            <Route path='editPackage/:id' element={<EditPackage />} />
             <Route path='enquiry' element={<AdminEnquiries />} />
             <Route path='packageBooking' element={<AdminPackageBookings />} />
           </Route>
