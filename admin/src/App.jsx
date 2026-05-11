@@ -1,19 +1,19 @@
 import React from 'react'
 import "./App.css";
-import AdminLayout from './AdminLayout';
+import AdminLayout from '../../client/src/admin/AdminLayout';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Destinations from './Destination';
-import Users from './Users';
-import Dashboard from './Dashboard';
-import Bookings from './Bookings';
-import Packages from './Packages';
-import AddDestination from './AddDestination';
+import Destinations from '../../client/src/admin/Destination';
+import Users from '../../client/src/admin/Users';
+import Dashboard from '../../client/src/admin/Dashboard';
+import Bookings from '../../client/src/admin/Bookings';
+import Packages from '../../client/src/admin/Packages';
+import AddDestination from '../../client/src/admin/AddDestination';
 import EditDestination from './EditDestination';
-import AddPackage from './AddPackages';
-import EditPackage from './EditPckages';
-import AdminEnquiries from './Enquiry';
-import EnquiriesHeader from './Enquiry';
-import AdminPackageBookings from './PackageBookings';
+import AddPackage from '../../client/src/admin/AddPackages';
+import EditPackage from '../../client/src/admin/EditPckages';
+import AdminEnquiries from '../../client/src/admin/Enquiry';
+import EnquiriesHeader from '../../client/src/admin/Enquiry';
+import AdminPackageBookings from '../../client/src/admin/PackageBookings';
 
 const App = () => {
   return (

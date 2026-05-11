@@ -16,18 +16,18 @@ import Profile from './Profile';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ContactUs from './components/ContactUs';
-import AdminLayout from '../../admin/src/AdminLayout';
-import AdminDashboard from '../../admin/src/Dashboard';
-import Destinations from '../../admin/src/Destination';
-import Packages from '../../admin/src/Packages';
-import AdminTaxiBookings from '../../admin/src/Bookings';
-import Users from '../../admin/src/Users';
-import AddDestination from '../../admin/src/AddDestination';
+import AdminLayout from './admin/AdminLayout';
+import AdminDashboard from './admin/Dashboard';
+import Destinations from './admin/Destination';
+import Packages from './admin/Packages';
+import AdminTaxiBookings from './admin/Bookings';
+import Users from './admin/Users';
+import AddDestination from './admin/AddDestination';
 import EditDestination from '../../admin/src/EditDestination';
-import AddPackage from '../../admin/src/AddPackages';
-import EditPackage from '../../admin/src/EditPckages';
-import AdminEnquiries from '../../admin/src/Enquiry';
-import AdminPackageBookings from '../../admin/src/PackageBookings';
+import AddPackage from './admin/AddPackages';
+import EditPackage from './admin/EditPckages';
+import AdminEnquiries from './admin/Enquiry';
+import AdminPackageBookings from './admin/PackageBookings';
 
 
 const App = () => {
