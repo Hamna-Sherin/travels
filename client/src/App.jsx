@@ -28,18 +28,6 @@ import AddPackage from './admin/AddPackages';
 import EditPackage from './admin/EditPckages';
 import AdminEnquiries from './admin/Enquiry';
 import AdminPackageBookings from './admin/PackageBookings';
-// import AdminLayout from './admin/AdminLayout';
-// import AdminDashboard from './admin/Dashboard';
-// import Destinations from './admin/Destination';
-// import Packages from './admin/Packages';
-// import AdminTaxiBookings from './admin/Bookings';
-// import Users from './admin/Users';
-// import AddDestination from './admin/AddDestination';
-// import EditDestination from '../../admin/src/EditDestination';
-// import AddPackage from './admin/AddPackages';
-// import EditPackage from './admin/EditPckages';
-// import AdminEnquiries from './admin/Enquiry';
-// import AdminPackageBookings from './admin/PackageBookings';
 
 
 const App = () => {
