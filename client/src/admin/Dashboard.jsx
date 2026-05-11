@@ -561,7 +561,7 @@ const AdminDashboard = () => {
             value={stats.destinations}
             color="#16a34a"
             bg="#dcfce7"
-            route="/destinations"
+            route="/admin/destinations"
           />
         </Col>
 
@@ -573,7 +573,7 @@ const AdminDashboard = () => {
             value={stats.packages}
             color="#6366f1"
             bg="#eef2ff"
-            route="/packages"
+            route="/admin/packages"
           />
         </Col>
 
@@ -585,7 +585,7 @@ const AdminDashboard = () => {
             value={stats.enquiries.total}
             color="#2563eb"
             bg="#dbeafe"
-            route="/enquiry"
+            route="/admin/enquiry"
             subStats={[
               { label: "New", value: stats.enquiries.new, color: "#2563eb", bg: "#dbeafe" },
               { label: "Contacted", value: stats.enquiries.contacted, color: "#854d0e", bg: "#fef9c3" },
@@ -602,7 +602,7 @@ const AdminDashboard = () => {
             value={stats.taxi.total}
             color="#d97706"
             bg="#fef9c3"
-            route="/bookings"
+            route="/admin/bookings"
             subStats={[
               { label: "Pending", value: stats.taxi.pending, color: "#854d0e", bg: "#fef9c3" },
               { label: "Confirmed", value: stats.taxi.confirmed, color: "#15803d", bg: "#dcfce7" },
@@ -619,7 +619,7 @@ const AdminDashboard = () => {
             value={stats.pkgBookings.total}
             color="#be185d"
             bg="#fce7f3"
-            route="/packageBooking"
+            route="/admin/packageBooking"
             subStats={[
               { label: "Pending", value: stats.pkgBookings.pending, color: "#854d0e", bg: "#fef9c3" },
               { label: "Confirmed", value: stats.pkgBookings.confirmed, color: "#15803d", bg: "#dcfce7" },
@@ -637,10 +637,10 @@ const AdminDashboard = () => {
 
       <Row className="g-3">
         {[
-          { label: "Add Destination", route: "/addDestination", icon: <FiMapPin />, color: "#16a34a", bg: "#dcfce7" },
-          { label: "Add Package", route: "/addPackage", icon: <FiPackage />, color: "#6366f1", bg: "#eef2ff" },
-          { label: "View Enquiries", route: "/enquiry", icon: <FiMessageSquare />, color: "#2563eb", bg: "#dbeafe" },
-          { label: "Taxi Bookings", route: "/bookings", icon: <FiTruck />, color: "#d97706", bg: "#fef9c3" },
+          { label: "Add Destination", route: "/admin/addDestination", icon: <FiMapPin />, color: "#16a34a", bg: "#dcfce7" },
+          { label: "Add Package", route: "/admin/addPackage", icon: <FiPackage />, color: "#6366f1", bg: "#eef2ff" },
+          { label: "View Enquiries", route: "/admin/enquiry", icon: <FiMessageSquare />, color: "#2563eb", bg: "#dbeafe" },
+          { label: "Taxi Bookings", route: "/admin/bookings", icon: <FiTruck />, color: "#d97706", bg: "#fef9c3" },
         ].map(a => (
           <Col xs={6} md={3} key={a.label}>
             <button

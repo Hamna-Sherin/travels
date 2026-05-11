@@ -278,7 +278,7 @@ const Destinations = () => {
                             />
                         </InputGroup>
 
-                        <Link to="/addDestination"
+                        <Link to="/admin/addDestination"
                             className="btn btn-sm fw-bold d-flex align-items-center gap-2"
                             style={{ background: "#1a6b5e", color: "white", border: "none", borderRadius: "8px", padding: "8px 18px", textDecoration: "none" }}>
                             <FiPlus size={14} /> Add Destination
@@ -295,7 +295,7 @@ const Destinations = () => {
                     <div className="text-center py-5">
                         <FiMapPin size={48} style={{ color: "#1a6b5e", opacity: 0.2, marginBottom: "12px", display: "block", margin: "0 auto 12px" }} />
                         <p className="text-muted mb-3">No destinations found.</p>
-                        <Link to="/addDestination"
+                        <Link to="/admin/addDestination"
                             className="btn btn-sm fw-bold"
                             style={{ background: "#1a6b5e", color: "white", border: "none", borderRadius: "8px", padding: "10px 24px" }}>
                             <FiPlus className="me-2" /> Add First Destination
@@ -366,7 +366,7 @@ const Destinations = () => {
                                             {/* Actions */}
                                             <td style={{ padding: "13px 14px", verticalAlign: "middle" }}>
                                                 <div className="d-flex align-items-center gap-2">
-                                                    <Link to={`/editDestination/${dest._id}`}
+                                                    <Link to={`/admin/editDestination/${dest._id}`}
                                                         className="btn btn-sm fw-bold d-flex align-items-center gap-1"
                                                         style={{ background: "#fef9c3", color: "#854d0e", border: "none", fontSize: "0.78rem" }}>
                                                         <FiEdit2 size={12} /> Edit

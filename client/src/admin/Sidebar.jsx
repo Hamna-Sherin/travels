@@ -6,7 +6,7 @@ const Sidebar = () => {
         <div className="admin-sidebar">
             <h4>ADMIN PANEL</h4>
             <ul>
-                <li><NavLink to="admin">Dashboard</NavLink></li>
+                <li><NavLink to="/admin">Dashboard</NavLink></li>
                 <li><NavLink to="destinations">Destinations</NavLink></li>
                 <li><NavLink to="packages">Packages</NavLink></li>
                 <li><NavLink to="bookings">Taxi Bookings</NavLink></li>
@@ -19,3 +19,4 @@ const Sidebar = () => {
 }
 
 export default Sidebar
+

@@ -250,7 +250,7 @@ const Packages = () => {
                         </InputGroup>
 
                         <button
-                            onClick={() => navigate("/addPackage")}
+                            onClick={() => navigate("/admin/addPackage")}
                             className="btn btn-sm fw-bold d-flex align-items-center gap-2"
                             style={{ background: "#1a6b5e", color: "white", border: "none", borderRadius: "8px", padding: "8px 18px" }}>
                             <FiPlus size={14} /> Add Package
@@ -291,7 +291,7 @@ const Packages = () => {
                 ) : filtered.length === 0 ? (
                     <div className="text-center py-5">
                         <p className="text-muted">No packages found.</p>
-                        <button onClick={() => navigate("/addPackage")}
+                        <button onClick={() => navigate("/admin/addPackage")}
                             className="btn btn-sm fw-bold"
                             style={{ background: "#1a6b5e", color: "white", border: "none", borderRadius: "8px", padding: "10px 24px" }}>
                             <FiPlus className="me-2" /> Add First Package
@@ -364,7 +364,7 @@ const Packages = () => {
 
                                             <td style={{ padding: "13px 14px", verticalAlign: "middle" }}>
                                                 <div className="d-flex align-items-center gap-2">
-                                                    <Link to={`/editPackage/${pkg._id}`}
+                                                    <Link to={`/admin/editPackage/${pkg._id}`}
                                                         className="btn btn-sm fw-bold d-flex align-items-center gap-1"
                                                         style={{ background: "#fef9c3", color: "#854d0e", border: "none", fontSize: "0.78rem" }}>
                                                         <FiEdit2 size={12} /> Edit
