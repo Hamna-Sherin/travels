@@ -9,6 +9,8 @@ const UserModel = require("./models/User");
 const PackageModel = require("./models/Package")
 const EnquiryModel = require("./models/Enquiry")
 const PackageBookingModel = require("./models/Package-Booking");
+const NotificationModel = require("./models/Notification");
+
 
 
 const app = express();
@@ -156,6 +158,12 @@ app.post("/booking", async (req, res) => {
         await booking.save();
 
         res.json({ message: "Booking saved successfully" });
+
+        await NotificationModel.create({
+            title: "New Booking",
+            message: `${req.body.name} booked ${req.body.packageName}`,
+            type: "success"
+        });
 
     } catch (err) {
         res.status(500).json(err);
@@ -468,6 +476,28 @@ app.delete("/package-bookings/:id", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
+});
+
+// CREATE (use this when booking happens)
+app.post("/notifications", async (req, res) => {
+    const notif = await NotificationModel.create(req.body);
+    res.json(notif);
+});
+
+// GET ALL
+app.get("/notifications", async (req, res) => {
+    const data = await NotificationModel.find().sort({ createdAt: -1 });
+    res.json(data);
+});
+
+// MARK AS READ
+app.put("/notifications/:id", async (req, res) => {
+    const updated = await NotificationModel.findByIdAndUpdate(
+        req.params.id,
+        { read: true },
+        { new: true }
+    );
+    res.json(updated);
 });
 
 app.listen(5000, () => {
