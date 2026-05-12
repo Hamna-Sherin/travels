@@ -159,7 +159,7 @@ app.post("/booking", async (req, res) => {
 
         res.json({ message: "Booking saved successfully" });
 
-        
+
 
     } catch (err) {
         res.status(500).json(err);
@@ -434,12 +434,12 @@ app.post("/package-booking", async (req, res) => {
     try {
         const newBooking = new PackageBookingModel(req.body);
         await newBooking.save();
-        res.status(201).json({ message: "Package booking saved" });
         await NotificationModel.create({
             title: "New Booking",
             message: `${req.body.name} booked ${req.body.packageName}`,
             type: "success"
         });
+        res.status(201).json({ message: "Package booking saved" });
     } catch (err) {
         res.status(500).json({ message: "Error saving booking" });
     }
