@@ -20,7 +20,8 @@ const bookingSchema = new mongoose.Schema({
   vehicleType: String,
   name: String,
   phone: String,
-  status: String
+  status: String,
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 const BookingModel = mongoose.model("bookings", bookingSchema)
