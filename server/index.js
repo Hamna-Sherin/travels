@@ -192,6 +192,27 @@ app.put("/bookings/:id", async (req, res) => {
             { new: true }
         );
 
+        const messages = {
+            pending: "Your taxi booking is pending confirmation. We'll update you shortly.",
+            confirmed: "Great news! Your taxi booking has been confirmed. Have a safe journey!",
+            cancelled: "Unfortunately, your taxi booking has been cancelled. Please contact us for assistance.",
+        };
+
+        const titles = {
+            pending: "Taxi Booking Pending",
+            confirmed: "Taxi Booking Confirmed ✓",
+            cancelled: "Taxi Booking Cancelled",
+        };
+
+        if (updatedBooking.userId) {
+            await NotificationModel.create({
+                userId: updatedBooking.userId,
+                title: titles[status] || "Booking Update",
+                message: messages[status] || `Your booking status has been updated to ${status}.`,
+                type: "booking",
+            });
+        }
+
         res.json(updatedBooking);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -434,10 +455,16 @@ app.post("/package-booking", async (req, res) => {
     try {
         const newBooking = new PackageBookingModel(req.body);
         await newBooking.save();
+        // await NotificationModel.create({
+        //     title: "New Booking",
+        //     message: `${req.body.name} booked ${req.body.packageName}`,
+        //     type: "success"
+        // });
         await NotificationModel.create({
-            title: "New Booking",
-            message: `${req.body.name} booked ${req.body.packageName}`,
-            type: "success"
+            userId: req.body.userId,        // send this from client
+            title: "Package Booking Confirmed",
+            message: `Your booking for "${req.body.packageName}" has been received. We'll confirm shortly.`,
+            type: "package",
         });
         res.status(201).json({ message: "Package booking saved" });
     } catch (err) {
@@ -486,19 +513,53 @@ app.post("/notifications", async (req, res) => {
 });
 
 // GET ALL
+// app.get("/notifications", async (req, res) => {
+//     const data = await NotificationModel.find().sort({ createdAt: -1 });
+//     res.json(data);
+// });
+
 app.get("/notifications", async (req, res) => {
-    const data = await NotificationModel.find().sort({ createdAt: -1 });
-    res.json(data);
+    try {
+        const { userId } = req.query;
+        const notifications = await NotificationModel
+            .find({ userId })
+            .sort({ createdAt: -1 });
+        res.json(notifications);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 // MARK AS READ
+// app.put("/notifications/:id", async (req, res) => {
+//     const updated = await NotificationModel.findByIdAndUpdate(
+//         req.params.id,
+//         { read: true },
+//         { new: true }
+//     );
+//     res.json(updated);
+// });
+
 app.put("/notifications/:id", async (req, res) => {
-    const updated = await NotificationModel.findByIdAndUpdate(
-        req.params.id,
-        { read: true },
-        { new: true }
-    );
-    res.json(updated);
+    try {
+        const updated = await NotificationModel.findByIdAndUpdate(
+            req.params.id,
+            { read: true },
+            { new: true }
+        );
+        res.json(updated);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+app.delete("/notifications/:id", async (req, res) => {
+    try {
+        await NotificationModel.findByIdAndDelete(req.params.id);
+        res.json({ message: "Deleted" });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 app.listen(5000, () => {
